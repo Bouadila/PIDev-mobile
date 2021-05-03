@@ -1,4 +1,4 @@
-package main;
+package com.mycompany.ListSerie;
 
 
 import static com.codename1.ui.CN.*;

@@ -22,7 +22,8 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.util.Resources;
-import static main.MyApplication.theme;
+import static com.mycompany.ListSerie.MyApplication.theme;
+
 
 /**
  *

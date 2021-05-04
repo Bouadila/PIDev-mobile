@@ -1,4 +1,4 @@
-package main;
+package com.mycompany.ListSerie;
 
 
 import GUI.Formation.AfficherFormation;
@@ -58,11 +58,11 @@ public class MyApplication {
 //        hi.show();
 
 
-//            AjouterFormation AF=new AjouterFormation();
-//            AF.show();
+            AjouterFormation AF=new AjouterFormation();
+            AF.show();
             
-             AfficherFormation AfF=new AfficherFormation();
-            AfF.show();
+//            AfficherFormation AfF=new AfficherFormation();
+//            AfF.show();
     }
 
     public void stop() {

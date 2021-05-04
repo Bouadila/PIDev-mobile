@@ -1,6 +1,8 @@
 package main;
 
 
+import GUI.Formation.AfficherFormation;
+import GUI.Formation.AjouterFormation;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
@@ -21,7 +23,7 @@ import com.codename1.io.NetworkEvent;
 public class MyApplication {
 
     private Form current;
-    private Resources theme;
+    public static Resources theme;
 
     public void init(Object context) {
         // use two network threads instead of one
@@ -51,9 +53,16 @@ public class MyApplication {
             current.show();
             return;
         }
-        Form hi = new Form("Hi World", BoxLayout.y());
-        hi.add(new Label("Hi World"));
-        hi.show();
+//        Form hi = new Form("Hi World", BoxLayout.y());
+//        hi.add(new Label("Hi World"));
+//        hi.show();
+
+
+//            AjouterFormation AF=new AjouterFormation();
+//            AF.show();
+            
+             AfficherFormation AfF=new AfficherFormation();
+            AfF.show();
     }
 
     public void stop() {

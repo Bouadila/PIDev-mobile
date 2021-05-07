@@ -17,7 +17,7 @@ public class Formation {
     private int id;
     private String url;
     private String title;
-    private Date publish_date;
+    private String publish_date;
     private String description;
     private String domaine;
     private String votes;
@@ -47,7 +47,7 @@ public class Formation {
 //        this.owner = owner;
 //    }
 
-    public Formation(String url, String title, Date publish_date, String description, String domaine) {
+    public Formation(String url, String title, String publish_date, String description, String domaine) {
         this.url = url;
         this.title = title;
         this.publish_date = publish_date;
@@ -90,11 +90,11 @@ public class Formation {
         this.title = title;
     }
 
-    public Date getPublish_date() {
+    public String getPublish_date() {
         return publish_date;
     }
 
-    public void setPublish_date(Date publish_date) {
+    public void setPublish_date(String publish_date) {
         this.publish_date = publish_date;
     }
 

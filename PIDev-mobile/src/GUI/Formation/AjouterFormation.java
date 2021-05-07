@@ -7,9 +7,12 @@ package GUI.Formation;
 
 import Entities.Formation;
 import com.codename1.components.FloatingHint;
+import com.codename1.components.InfiniteProgress;
+import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.BrowserComponent;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
+import com.codename1.ui.Component;
 import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
@@ -39,7 +42,7 @@ public class AjouterFormation extends Form {
     String embededurl;
     ServiceFormation cs = ServiceFormation.getInstance();
 
-    public AjouterFormation()  {
+    public AjouterFormation(Resources res)  {
         
           
         
@@ -91,7 +94,7 @@ public class AjouterFormation extends Form {
         super(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER));
         
         
-        ServiceFormation cs = ServiceFormation.getInstance();
+
         Formation v;
         Form parentForm = null;
         this.getAllStyles().setBgImage(theme.getImage("backgroundForm.jpg"));
@@ -102,11 +105,27 @@ public class AjouterFormation extends Form {
                 (ev) -> parentForm.showBack());
         Label FormTitle = new Label("Add New Video");
         FormTitle.getAllStyles().setAlignment(CENTER);
+        
         TextField url = new TextField("", "URL", 15, TextField.EMAILADDR);
+        url.setUIID("TextFieldBlack");
+        addStringValue("url",url);
+        
+        
         TextField title = new TextField("", "Title", 15, TextField.EMAILADDR);
+        title.setUIID("TextFieldBlack");
+        addStringValue("title",title);
+        
         Label dateLabel = new Label(new Date(System.currentTimeMillis()).toString());
+        
+        
         TextField description = new TextField("", "Description", 15, TextField.EMAILADDR);
+        description.setUIID("TextFieldBlack");
+        addStringValue("description",description);
+        
+        
         TextField domaine = new TextField("", "Domaine", 15, TextField.EMAILADDR);
+        domaine.setUIID("TextFieldBlack");
+        addStringValue("domaine",domaine);
         
         
         BrowserComponent browser = new BrowserComponent();
@@ -124,17 +143,38 @@ public class AjouterFormation extends Form {
             }
         });
         Button Postvideo = new Button("Post Video");
+        addStringValue("",Postvideo);
+        
         Postvideo.getAllStyles().setAlignment(RIGHT);
         Postvideo.setUIID("LoginButton");
         Postvideo.addActionListener(e -> {
+            try{
             if ((url.getText().length() == 0) || (title.getText().length() == 0)) {
                 Dialog.show("Alert", "Please fill all fields", new Command("OK"));
             } else {
+                
+                InfiniteProgress ip = new InfiniteProgress();
+                final Dialog iDialog = ip.showInfiniteBlocking();
+                
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                
                 //Formation v = new Formation();
-                Formation f = new Formation(embededurl, title.getText(),  new Date(System.currentTimeMillis()),domaine.getText(),description.getText());
+                Formation f = new Formation(embededurl, String.valueOf(title.getText()).toString(), format.format(new Date()),String.valueOf(domaine.getText()).toString(),String.valueOf(description.getText()).toString());
 
+                System.out.println("data formation =="+f);
+                
+                cs.AjouterFormation(f);
+                
+                iDialog.dispose();
+                
+                refreshTheme();
+            }
+            }catch(Exception ex){
+                ex.printStackTrace();
             }
         });
+        
+        
         Container labels = new Container(BoxLayout.yCenter()).addAll(title,
                 url,domaine,description, dateLabel, Postvideo);
         Container by = new Container(new GridLayout(2, 1));
@@ -145,5 +185,12 @@ public class AjouterFormation extends Form {
         add(BorderLayout.NORTH, FormTitle);
         add(BorderLayout.CENTER, by);
       //  add(BorderLayout.SOUTH, Postvideo);
+    }
+    
+    private void addStringValue(String s , Component v){
+        
+//        add(BorderLayout.west(new Label(s,"PaddedLabel")).add(BorderLayout.CENTER,v));
+        //add(createLineSeparator(0xeeeeee));
+        
     }
     }

@@ -58,8 +58,10 @@ public class MyApplication {
 //        hi.show();
 
 
-            AjouterFormation AF=new AjouterFormation();
-            AF.show();
+//            AjouterFormation AF=new AjouterFormation(res);
+//            AF.show();
+            
+            new AjouterFormation(theme).show();
             
 //            AfficherFormation AfF=new AfficherFormation();
 //            AfF.show();

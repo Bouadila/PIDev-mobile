@@ -100,7 +100,7 @@ public class AfficherFormation extends Form{
         
         Button skip = new Button("Skip");
         skip.setUIID("SkipButton");
-        skip.addActionListener(e -> new AjouterFormation().show());
+       // skip.addActionListener(e -> new AjouterFormation().show());
         
         Container welcomeNoteArea = BoxLayout.encloseY(message,
                 LayeredLayout.encloseIn(

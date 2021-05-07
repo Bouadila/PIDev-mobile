@@ -141,7 +141,7 @@ Resources res = null;
                 Dialog.show("Alert", "Please fill all fields", new Command("OK"));
             } else {
                 //Formation v = new Formation();
-                Formation f = new Formation(embededurl, title.getText(),  new Date(System.currentTimeMillis()),domaine.getText(),description.getText());
+               // Formation f = new Formation(embededurl, title.getText(),  new Date(System.currentTimeMillis()),domaine.getText(),description.getText());
 
             }
         });

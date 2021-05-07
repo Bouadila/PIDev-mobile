@@ -102,13 +102,16 @@ public class ServiceFormation {
                        
                        //date
                        
-                       String DateConverter = obj.get("publishDate").toString().substring(obj.get("publishDate").toString().indexOf("timestamp") + 10 , obj.get("obj").toString().lastIndexOf("}"));
-                       
-                       Date currentTime = new Date(Double.valueOf(DateConverter).longValue() * 1000);
+                      // String DateConverter = obj.get("publishDate").toString().substring(obj.get("publishDate").toString().indexOf("timestamp") + 10 , obj.get("publishDate").toString().lastIndexOf("}"));
+                      String DateConverter = obj.get("publishDate").toString().substring(0,10);
+
+
+                      
+                      // Date currentTime = new Date(Double.valueOf(DateConverter).longValue() * 1000);
                        
                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                        
-                       String dateString = formatter.format(currentTime);
+                       String dateString = formatter.format(DateConverter);
                        
                        forma.setPublish_date(dateString);
                        

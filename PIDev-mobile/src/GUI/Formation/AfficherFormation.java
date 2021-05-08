@@ -15,6 +15,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
 import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
@@ -27,6 +28,7 @@ import com.codename1.ui.Tabs;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
+import com.codename1.ui.events.DataChangedListener;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
@@ -51,6 +53,8 @@ public class AfficherFormation extends Form {
     public AfficherFormation(Resources res) {
         super(new BorderLayout((BorderLayout.CENTER_BEHAVIOR_CENTER)));
 
+        
+       
         getTitleArea().setUIID("Container");
         setUIID("Welcome");
         Tabs t = new Tabs();
@@ -135,16 +139,20 @@ public class AfficherFormation extends Form {
         
         ArrayList<Formation> list = ServiceFormation.getInstance().AfficherFormation();
         System.out.println(list);
-        Container cont = new Container(new GridLayout(2, 1));
+
+        
+        
          Container by = new Container(new GridLayout(2, 1));
          by.setScrollableY(true);
-         Label space = new Label("   ");
+         Label space1 = new Label("   ");
+         
 
           
-          by.addAll(space);
+          by.addAll(space1);
           
         for (int i = 0; i < list.size(); i++) {
             
+   
             
             // for(Formation f : list){
 
@@ -157,8 +165,7 @@ public class AfficherFormation extends Form {
             ScaleImageLabel image = new ScaleImageLabel(urlim);
             Container containerImg = new Container();
             image.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
-            //addButton(urlim,f.getTitle(),f.getUrl(),f.getPublish_date(),f.getDomaine(),f.getDescription(), f);
-            //addButton(urlim,list.get(i).getTitle(),list.get(i).getUrl(),list.get(i).getPublish_date(),list.get(i).getDomaine(),list.get(i).getDescription(), list.get(i));
+            
 
             int height = Display.getInstance().convertToPixels(11.5f);
             int width = Display.getInstance().convertToPixels(14f);
@@ -171,41 +178,85 @@ public class AfficherFormation extends Form {
             Button delete = new Button("delete");
             
             
-            
-            Label nom = new Label("nom");
-            
-            
-            
-            TextArea ta = new TextArea(list.get(i).getTitle());
-            ta.setUIID("NewsTopLine");
-            ta.setEditable(false);
+            Label space2= new Label(" ");
+            Label space3= new Label(" ");
 
             
-//            Container labels = new Container(BoxLayout.yCenter()).addAll(ta,
-//                nom);
-//        
-//        cont.addAll(
-//                labels,
-//                delete
-//
-//        );
+            
+            
+            TextArea title = new TextArea("Titre : "+list.get(i).getTitle());
+            title.setUIID("NewsTopLine");
+            title.setEditable(false);
+            
+            BrowserComponent url = new BrowserComponent();
+             url.setURL(list.get(i).getUrl());
+             url.setVisible(true);
+      
+            TextArea domaine = new TextArea("Domaine : "+list.get(i).getDomaine());
+            domaine.setUIID("NewsTopLine");
+            domaine.setEditable(false);
+            
+            TextArea description = new TextArea("Description : "+list.get(i).getDescription());
+            description.setUIID("NewsTopLine");
+            description.setEditable(false);
+            
+            TextArea date = new TextArea("Date : "+list.get(i).getPublish_date());
+            date.setUIID("NewsTopLine");
+            date.setEditable(false);
 
+            
+
+            
+            int x = list.get(i).getId();
+              delete.addActionListener(e -> {
+            
+                  
+               Dialog dig = new Dialog("Suppression");
+               
+               if(dig.show("Suppression","Vous voulez supprimer cette formation?","Annuler","Oui")){
+                   
+                   dig.dispose();
+               }
+               else {
+                   dig.dispose();
+                   
+                   
+                    Formation f = new Formation();
+                    f.setId(x);
+                    
+ 
+                   
+                   ServiceFormation.getInstance().deleteFormation(f); 
+                   
+//                       new AfficherFormation(res);
+//                       
+//                   }
+               }
+              //  cs.AjouterFormation(f);
+                
+               
+                
+           
+        });
         
             
             
-            cnt.add(BorderLayout.WEST, BoxLayout.encloseY(ta,nom));
+            cnt.add(BorderLayout.WEST, BoxLayout.encloseY(title,domaine,description,date));
             cnt.add(BorderLayout.EAST, BoxLayout.encloseX(delete));
 
             
         by.addAll(
                 
-               cnt
+               cnt,
+               url,
+               space2
+               
                 
         );
         
             
         }
-        //add(BorderLayout.CENTER, cont);
+
        add(BorderLayout.CENTER,by);
 
 
@@ -217,23 +268,6 @@ public class AfficherFormation extends Form {
 
     }
 
-    private void addButton(Image img, String title, String url, String publish_date, String domaine, String description, Formation f) {
-
-        int height = Display.getInstance().convertToPixels(11.5f);
-        int width = Display.getInstance().convertToPixels(14f);
-
-        Button image = new Button(img.fill(width, height));
-        image.setUIID("Label");
-
-        Container cnt = BorderLayout.west(image);
-
-        TextArea ta = new TextArea(title);
-        ta.setUIID("NewsTopLine");
-        ta.setEditable(false);
-
-        cnt.add(BorderLayout.CENTER, BoxLayout.encloseY(ta));
-        add(BorderLayout.CENTER, cnt);
-
-    }
+   
 
 }

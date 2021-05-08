@@ -138,7 +138,7 @@ public class AjouterFormation extends Form {
             
         });
         
-//        add(LayeredLayout.encloseIn(GridLayout.encloseIn(3, mesListes, liste, partage),FlowLayout.encloseBottom(arrow)));
+       // add(BorderLayout.CENTER,LayeredLayout.encloseIn(GridLayout.encloseIn(3, mesListes, liste, partage),FlowLayout.encloseBottom(arrow)));
         
         partage.setSelected(true);
         arrow.setVisible(false);
@@ -253,8 +253,8 @@ public class AjouterFormation extends Form {
         
         
         
-       //add(BorderLayout.west(new Label(s,"PaddedLabel")).add(BorderLayout.CENTER,v));
-        //add(createLineSeparator(0xeeeeee));
+//       add(BorderLayout.west(new Label(s,"PaddedLabel")).add(BorderLayout.CENTER,v));
+        //add(BorderLayout.CENTER,createLineSeparator(0xeeeeee));
         
     }
     

@@ -30,7 +30,8 @@ public class ServiceFormation {
         
      public ArrayList<Formation> formations;
     public static ServiceFormation instance=null;
-    public boolean resultOK;
+    public static boolean resultOK = true;
+   
     private ConnectionRequest req;
     
     
@@ -171,6 +172,28 @@ public class ServiceFormation {
          return formation;
          
      }
+     
+     
+     
+     public boolean deleteFormation (Formation formation)
+     {
+         String url = Statics.BASE_URL+"/delete_video?id="+formation.getId();
+         req.setUrl(url);
+         req.addResponseListener(new ActionListener<NetworkEvent>() {
+             
+             @Override
+             public void actionPerformed(NetworkEvent evt){
+                 
+                 req.removeResponseCodeListener(this);
+             }
+             
+         });
+         
+         NetworkManager.getInstance().addToQueueAndWait(req);
+         return resultOK;
+     }
+     
+     
      
      
      

@@ -209,8 +209,7 @@ public class AfficherFormation extends Form {
             
             int x = list.get(i).getId();
               delete.addActionListener(e -> {
-            
-                  
+
                Dialog dig = new Dialog("Suppression");
                
                if(dig.show("Suppression","Vous voulez supprimer cette formation?","Annuler","Oui")){
@@ -219,24 +218,17 @@ public class AfficherFormation extends Form {
                }
                else {
                    dig.dispose();
-                   
-                   
+
                     Formation f = new Formation();
                     f.setId(x);
-                    
+
+                 if(ServiceFormation.getInstance().deleteFormation(f)){
+                     
+                      new AfficherFormation(res).show();
+                 }
  
-                   
-                   ServiceFormation.getInstance().deleteFormation(f); 
-                   
-//                       new AfficherFormation(res);
-//                       
-//                   }
                }
-              //  cs.AjouterFormation(f);
-                
-               
-                
-           
+ 
         });
         
             

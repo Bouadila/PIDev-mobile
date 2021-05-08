@@ -3,6 +3,7 @@ package com.mycompany.ListSerie;
 
 import GUI.Formation.AfficherFormation;
 import GUI.Formation.AjouterFormation;
+import GUI.Formation.ModifierFormation;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
@@ -61,9 +62,11 @@ public class MyApplication {
 //            AjouterFormation AF=new AjouterFormation(res);
 //            AF.show();
             
-          new AjouterFormation(theme).show();
+          //new AjouterFormation(theme).show();
             
-           // new AfficherFormation(theme).show();
+            new AfficherFormation(theme).show();
+           
+          // new ModifierFormation(theme).show();
             
 //            AfficherFormation AfF=new AfficherFormation();
 //            AfF.show();

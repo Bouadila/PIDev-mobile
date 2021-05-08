@@ -163,28 +163,25 @@ public class AjouterFormation extends Form {
         //
         
         
-        Label FormTitle = new Label("Add New Video");
+        Label FormTitle = new Label("Ajouter Formation");
         FormTitle.getAllStyles().setAlignment(CENTER);
         
         TextField url = new TextField("", "URL", 15, TextField.EMAILADDR);
-        url.setUIID("TextFieldBlack");
         addStringValue("url",url);
         
         
         TextField title = new TextField("", "Title", 15, TextField.EMAILADDR);
-        title.setUIID("TextFieldBlack");
         addStringValue("title",title);
         
         Label dateLabel = new Label(new Date(System.currentTimeMillis()).toString());
         
         
         TextField description = new TextField("", "Description", 15, TextField.EMAILADDR);
-        description.setUIID("TextFieldBlack");
         addStringValue("description",description);
         
+
         
         TextField domaine = new TextField("", "Domaine", 15, TextField.EMAILADDR);
-        domaine.setUIID("TextFieldBlack");
         addStringValue("domaine",domaine);
         
         
@@ -202,7 +199,7 @@ public class AjouterFormation extends Form {
                 }
             }
         });
-        Button Postvideo = new Button("Post Video");
+        Button Postvideo = new Button("Ajouter");
         addStringValue("",Postvideo);
         
         Postvideo.getAllStyles().setAlignment(RIGHT);

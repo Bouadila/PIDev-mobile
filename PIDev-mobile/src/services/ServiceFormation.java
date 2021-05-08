@@ -52,7 +52,7 @@ public class ServiceFormation {
      
      public void AjouterFormation(Formation Formation)
      {
-         String url= Statics.BASE_URL+"/add_video?url="+Formation.getUrl()+"&title="+Formation.getTitle()+"&domaine="+Formation.getDomaine()+"&description="+Formation.getDescription();
+         String url= Statics.BASE_URL+"/add_video?url="+Formation.getUrl()+"&title="+Formation.getTitle()+"&description="+Formation.getDescription()+"&domaine="+Formation.getDomaine();
          //&id_cand=1
          req.setUrl(url);
          req.addResponseListener((e)->{
@@ -195,6 +195,26 @@ public class ServiceFormation {
      
      
      
+    public boolean modifierFormation (Formation formation)  {
+       
+       String url = Statics.BASE_URL+"/update_video?id"+formation.getId()+"&url="+formation.getUrl()+"&title="+formation.getTitle()+"&domaine="+formation.getDomaine()+"&description="+formation.getDescription();
+       req.setUrl(url);
+       
+       req.addResponseListener(new ActionListener<NetworkEvent>() {
+             
+             @Override
+             public void actionPerformed(NetworkEvent evt){
+                 
+                resultOK = req.getResponseCode() == 200;
+                req.removeResponseCodeListener(this);
+             }
+             
+         });
+         
+         NetworkManager.getInstance().addToQueueAndWait(req);
+       return resultOK;
+      
+    }
      
      
      

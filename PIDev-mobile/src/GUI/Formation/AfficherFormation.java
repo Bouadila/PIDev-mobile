@@ -54,7 +54,14 @@ public class AfficherFormation extends Form {
         super(new BorderLayout((BorderLayout.CENTER_BEHAVIOR_CENTER)));
 
         
-       
+        Button gotoAfficher = new Button("Ajouter Formation");
+        
+        gotoAfficher.addActionListener(e -> {
+
+               new AjouterFormation(theme).show();
+ 
+        });   
+        
         getTitleArea().setUIID("Container");
         setUIID("Welcome");
         Tabs t = new Tabs();
@@ -176,6 +183,7 @@ public class AfficherFormation extends Form {
             Container cnt = BorderLayout.west(image);
 
             Button delete = new Button("delete");
+            Button update = new Button("update");
             
             
             Label space2= new Label(" ");
@@ -230,13 +238,20 @@ public class AfficherFormation extends Form {
                }
  
         });
+              
+              
+        update.addActionListener(e -> {
+
+               new ModifierFormation(theme).show();
+ 
+        });      
         
             
             
-            cnt.add(BorderLayout.WEST, BoxLayout.encloseY(title,domaine,description,date));
-            cnt.add(BorderLayout.EAST, BoxLayout.encloseX(delete));
+            cnt.add(BorderLayout.CENTER, BoxLayout.encloseY(title,domaine,date,description,BoxLayout.encloseX(update,delete)));
 
-            
+
+       
         by.addAll(
                 
                cnt,
@@ -249,8 +264,9 @@ public class AfficherFormation extends Form {
             
         }
 
+       add(BorderLayout.NORTH, gotoAfficher);
        add(BorderLayout.CENTER,by);
-
+       
 
 
 

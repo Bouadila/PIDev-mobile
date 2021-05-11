@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package Entities;
 
 /**
  *
- * @author User
+ * @author A.L.I.C.E
  */
-public class ServiceVotes {
+public class Candidature {
     
 }

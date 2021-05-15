@@ -1,6 +1,9 @@
 package com.mycompany.ListSerie;
 
 
+import GUI.User.Login;
+import GUI.User.ResetPwd;
+import GUI.User.ResetPwdCode;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
@@ -21,7 +24,7 @@ import com.codename1.io.NetworkEvent;
 public class MyApplication {
 
     private Form current;
-    private Resources theme;
+    public static Resources theme;
 
     public void init(Object context) {
         // use two network threads instead of one
@@ -47,13 +50,9 @@ public class MyApplication {
     }
     
     public void start() {
-        if(current != null){
-            current.show();
-            return;
-        }
-        Form hi = new Form("Hi World", BoxLayout.y());
-        hi.add(new Label("Hi World"));
-        hi.show();
+        new ResetPwdCode().show();
+        
+//            new Login().show();
     }
 
     public void stop() {

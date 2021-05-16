@@ -21,6 +21,7 @@ import com.codename1.ui.validation.NumericConstraint;
 import com.codename1.ui.validation.Validator;
 import com.mycompany.pidevapp.gui.CalendarForm;
 import com.mycompany.pidevapp.gui.FormAddOffre;
+import com.mycompany.pidevapp.gui.QuizAddForm;
 import com.mycompany.pidevapp.gui.SignInForm;
 import java.util.Date;
 
@@ -85,7 +86,7 @@ public class MyApplication {
 //            f.setEditOnShow(title.getField());
 //
 //            f.show();
-FormAddOffre fo = new FormAddOffre();
+QuizAddForm fo = new QuizAddForm();
 fo.show();
 
     }

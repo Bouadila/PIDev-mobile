@@ -23,6 +23,7 @@ import com.mycompany.pidevapp.gui.CalendarForm;
 import com.mycompany.pidevapp.gui.FormAddOffre;
 import com.mycompany.pidevapp.gui.QuizAddForm;
 import com.mycompany.pidevapp.gui.SignInForm;
+import com.mycompany.pidevapp.gui.TakeQuiz;
 import java.util.Date;
 
 /**
@@ -32,7 +33,7 @@ import java.util.Date;
 public class MyApplication {
 
     private Form current;
-    private Resources theme;
+    public static Resources theme;
 
     public void init(Object context) {
         // use two network threads instead of one
@@ -86,7 +87,7 @@ public class MyApplication {
 //            f.setEditOnShow(title.getField());
 //
 //            f.show();
-QuizAddForm fo = new QuizAddForm();
+TakeQuiz fo = new TakeQuiz();
 fo.show();
 
     }

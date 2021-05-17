@@ -5,6 +5,8 @@
  */
 package com.mycompany.pidevapp.entities;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Bou3dila
@@ -13,6 +15,17 @@ public class Quiz {
     private int id;
     private String nom_quiz;
     private int nomb_question;
+    private ArrayList<Question> questions;
+
+    public ArrayList<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(ArrayList<Question> qs) {
+        this.questions = qs;
+    }
+    
+    
 
     public Quiz(int id, String nom_quiz, int nomb_question) {
         this.id = id;

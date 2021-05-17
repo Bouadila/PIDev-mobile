@@ -6,6 +6,7 @@
 package com.mycompany.pidevapp.gui;
 
 import com.codename1.ui.Button;
+import com.codename1.ui.ButtonGroup;
 import com.codename1.ui.Container;
 import com.codename1.ui.Label;
 import com.codename1.ui.RadioButton;
@@ -36,6 +37,9 @@ public class QuizAddForm extends BaseForm {
                 )
         );
 
+        
+        ServiceQuiz sq = new ServiceQuiz();
+        
         Container con = new Container();
 
         TextComponent titre = new TextComponent().label("Titre");
@@ -62,10 +66,53 @@ public class QuizAddForm extends BaseForm {
         RadioButton r2 = new RadioButton();
         RadioButton r3 = new RadioButton();
         RadioButton r4 = new RadioButton();
+        ButtonGroup btnGroupe = new ButtonGroup(r1, r2, r3, r4);
         int nbr = 2;
+        TextComponent text = new TextComponent().label("Contenu");
 
         Button btn2 = new Button("-");
         Button btn1 = new Button("-");
+        
+        btnFinish.addActionListener(e -> {
+        
+                Question ques = new Question();
+                ques.setContenu_ques(text.getText());
+                text.text("");
+                ArrayList<String> list = new ArrayList();
+                list.add(q1.getText());
+                q1.text("");
+                list.add(q2.getText());
+                q2.text("");
+                if (nbr > 2) {
+                    list.add(q3.getText());
+                    q3.text("");
+                }
+                if (nbr > 3) {
+                    list.add(q4.getText());
+                    q4.text("");
+                    
+                }
+                int vrai = 1;
+                r1.setSelected(false);
+                if (r2.isSelected()) {
+                    vrai = 2;
+                    r2.setSelected(false);
+                }
+                if (r3.isSelected()) {
+                    vrai = 3;
+                    r3.setSelected(false);
+                }
+                if (r4.isSelected()) {
+                    vrai = 4;
+                    r4.setSelected(false);
+                }
+                q3.text("");
+                q4.text("");
+
+                sq.addQuestion(ques, list, vrai);
+                ////okhrejjjjj
+        });
+        
         btn1.addActionListener(e -> {
             decrement(nbr);
             if (nbr == 3) {
@@ -97,7 +144,7 @@ public class QuizAddForm extends BaseForm {
 
         });
 
-        TextComponent text = new TextComponent().label("Contenu");
+        
         Button plus = new Button("+");
 
         plus.addActionListener(e -> {
@@ -125,7 +172,7 @@ public class QuizAddForm extends BaseForm {
                 .add(tl.createConstraint().widthPercentage(80), q2)
                 .add(tl.createConstraint().widthPercentage(10), new Label());
 
-        ServiceQuiz sq = new ServiceQuiz();
+        
         System.out.println(btnCon.getComponentCount());
         btn.addActionListener(event -> {
 
@@ -155,9 +202,11 @@ public class QuizAddForm extends BaseForm {
                 q2.text("");
                 if (nbr > 2) {
                     list.add(q3.getText());
+                    q3.text("");
                 }
                 if (nbr > 3) {
                     list.add(q4.getText());
+                    q4.text("");
                     
                 }
                 int vrai = 1;

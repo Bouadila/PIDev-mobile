@@ -5,6 +5,8 @@
  */
 package com.mycompany.pidevapp.entities;
 
+import java.util.ArrayList;
+
 
 
 
@@ -20,6 +22,17 @@ public class Question {
     private String contenu_ques;
     private int nomb_rep;
     private int duree;
+    private ArrayList< Reponse> reponses;
+
+    public ArrayList<Reponse> getReponses() {
+        return reponses;
+    }
+
+    public void setReponses(ArrayList<Reponse> reponses) {
+        this.reponses = reponses;
+    }
+    
+    
 
     public Question() {
     }

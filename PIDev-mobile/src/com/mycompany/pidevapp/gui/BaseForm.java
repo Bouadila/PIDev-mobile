@@ -49,6 +49,12 @@ public class BaseForm extends Form {
         Image statsImage = null;
         if(isCurrentStats()) statsImage = selection;
         
+        Image offreImage = null;
+        if(isCurrentOffre()) offreImage = selection;
+        
+        Image NoterRendezVousImage = null;
+        if(isCurrentNoterRendezVous()) NoterRendezVousImage = selection;
+        
         Button inboxButton = new Button("Inbox", inboxImage);
         inboxButton.setUIID("SideCommand");
         inboxButton.getAllStyles().setPaddingBottom(0);
@@ -56,14 +62,15 @@ public class BaseForm extends Form {
                 new Label("18", "SideCommandNumber"));
         inbox.setLeadComponent(inboxButton);
         inbox.setUIID("SideCommand");
-//        inboxButton.addActionListener(e -> new InboxForm().show());
+        inboxButton.addActionListener(e -> new InboxForm().show());
         getToolbar().addComponentToSideMenu(inbox);
         
         getToolbar().addCommandToSideMenu("Stats", statsImage, e -> new StatsForm(res).show());
         getToolbar().addCommandToSideMenu("Calendar", calendarImage, e -> new CalendarForm(res).show());
         getToolbar().addCommandToSideMenu("Map", null, e -> {});
         getToolbar().addCommandToSideMenu("Trending", trendingImage, e -> new TrendingForm(res).show());
-        getToolbar().addCommandToSideMenu("Settings", null, e -> {});
+        getToolbar().addCommandToSideMenu("Offre",offreImage, e -> {new ShowOffreForm().show();});
+        getToolbar().addCommandToSideMenu("NoterRendezVous", NoterRendezVousImage, e -> new NoterRendezVousForm().show());
         
         // spacer
         getToolbar().addComponentToSideMenu(new Label(" ", "SideCommand"));
@@ -86,6 +93,13 @@ public class BaseForm extends Form {
     }
 
     protected boolean isCurrentStats() {
+        return false;
+    }
+    
+    protected boolean isCurrentOffre() {
+        return false;
+    }
+     protected boolean isCurrentNoterRendezVous() {
         return false;
     }
 }

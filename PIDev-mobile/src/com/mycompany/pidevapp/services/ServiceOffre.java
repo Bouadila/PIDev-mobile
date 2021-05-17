@@ -42,7 +42,7 @@ public class ServiceOffre {
         }
         return instance;
     }
-     public boolean addOffre(Offre o) {
+      public boolean addOffre(Offre o) {
          //création de l'URL
          SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
          String date1 = format1.format(o.getDateExpiration());

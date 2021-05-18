@@ -6,12 +6,17 @@
 package services;
 
 import Entities.Reclamation;
+import com.codename1.io.CharArrayReader;
 import com.codename1.io.ConnectionRequest;
+import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
-import com.codename1.l10n.SimpleDateFormat;
+import com.codename1.l10n.ParseException;
 import com.codename1.ui.events.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import utils.Statics;
 
 /**
@@ -39,10 +44,13 @@ public class ServiceReclamation {
 
     public boolean addRec(Reclamation r) {
         //création de l'URL
-        String url = Statics.BASE_URL + "api/reclamation/new?title=" + r.getTitle()
-                + "description_Reclamation" + r.getDescRec()
-                + "type" + r.getType()
-                + "";
+        String url = Statics.BASE_URL + "/api/reclamation/new?title=" + r.getTitle()
+                + "&date_Reclamation=" + r.getDateRec()
+                + "&description_Reclamation=" + r.getDescRec()
+                + "&type=" + r.getType()
+                + "&email=" + r.getEmail()
+                + "&status=" + r.getStatus()
+                + "&id_user=" + r.getId_user() ;
         req.setUrl(url);// Insertion de l'URL de notre demande de connexion
         req.addResponseListener(new ActionListener<NetworkEvent>() {
 
@@ -73,9 +81,47 @@ public class ServiceReclamation {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
-
-    public ArrayList<Reclamation> getAllRec() {
-        String url = Statics.BASE_URL + "api/reclamation";
+    
+     public ArrayList<Reclamation> parseRecs(String jsonText) throws ParseException{
+        try {
+            reclamations=new ArrayList<>();
+            JSONParser j = new JSONParser();
+            Map<String,Object> recsListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+            List<Map<String,Object>> list = (List<Map<String,Object>>)recsListJson.get("root");
+           
+            for (Map<String,Object> obj : list){
+                
+                Reclamation r = new Reclamation();
+                
+                float id = Float.parseFloat(obj.get("id").toString());
+                String title = obj.get("title").toString();
+                String date_Reclamation = obj.get("date_Reclamation").toString();
+                String description_Reclamation = obj.get("description_Reclamation").toString();
+                String type = obj.get("type").toString();
+                String email = obj.get("email").toString();
+                String status = obj.get("status").toString();
+                float id_user = Float.parseFloat(obj.get("id_user").toString());
+                
+                r.setId((int)id);
+                r.setTitle(title);
+                r.setDateRec(date_Reclamation);
+                r.setDescRec(description_Reclamation);
+                r.setType(type);
+                r.setEmail(email);
+                r.setStatus(status);
+                r.setId_user((int)id_user);
+                
+                reclamations.add(r);
+            }   
+            
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return reclamations;
+    }
+     
+     public ArrayList<Reclamation> getAllRecs(){
+        String url = Statics.BASE_URL+"/api/reclamation";
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -92,33 +138,19 @@ public class ServiceReclamation {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return reclamations;
     }
-    
-    public ArrayList<Reclamation> parseRecs(String jsonText) throws ParseException{
-        try {
-            offres=new ArrayList<>();
-            JSONParser j = new JSONParser();
-            Map<String,Object> offresListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
-            List<Map<String,Object>> list = (List<Map<String,Object>>)offresListJson.get("root");
-            for(Map<String,Object> obj : list){
-                Offre o = new Offre();
-                float id = Float.parseFloat(obj.get("id").toString());
-                String description = obj.get("description").toString();
-                float salaire = Float.parseFloat(obj.get("salaire").toString());
-                float nombrePlace = Float.parseFloat(obj.get("nombrePlace").toString());
-                //contrait
-                String post = obj.get("post").toString();
-                String objectif=obj.get("objectif").toString();
-                String competences=obj.get("competences").toString();
-                String domaine=obj.get("domaine").toString();
-                o.setId((int)id);
-                o.setDescription(description);
-                o.setSalaire((int)salaire);
-                o.setNombrePlace((int)nombrePlace);
-                o.setPost(post);
-                o.setObjectif(objectif);
-                o.setCompetences(competences);
-                o.setDomaine(domaine);
-                //Ajouter la tâche extraite de la réponse Json à la liste
-                offres.add(o);
+     public boolean updateRec(Reclamation r) {
+        String url = Statics.BASE_URL + "/api/reclamation/update/" + r.getId()
+                +"?title=" + r.getTitle()
+                + "&description_Reclamation=" + r.getDescRec();
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; 
+                req.removeResponseListener(this);
             }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
 }

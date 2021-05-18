@@ -36,7 +36,7 @@ public class TakeQuiz extends BaseForm {
     public TakeQuiz() {
         installSidemenu(theme);
         ServiceQuiz sq = new ServiceQuiz();
-        z = sq.takeQuiz(50);
+        z = sq.takeQuiz(28);
 
         tf.setText("0");
         tf.setVisible(false);

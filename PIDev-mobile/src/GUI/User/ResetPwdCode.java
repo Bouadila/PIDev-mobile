@@ -39,7 +39,7 @@ public class ResetPwdCode extends Form {
 
     public ResetPwdCode() {
         current = this;
-        setTitle("mot de passe oublier");
+        setTitle("Mot de passe oublier");
         setLayout(BoxLayout.y());
         Style loginStyle = getAllStyles();
 
@@ -65,7 +65,7 @@ public class ResetPwdCode extends Form {
          * ***********************************************************************************************
          */
         Style logoStyle = Logo.getAllStyles();
-        logoStyle.setMargin(Component.TOP, 80);
+        logoStyle.setMargin(Component.TOP,120);
         Font largeBoldSystemFont = Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_LARGE);
 
         /**
@@ -88,7 +88,9 @@ public class ResetPwdCode extends Form {
         passwordStyle.setBgTransparency(255);
         tpassword.setHint("Vérifier mot de passe ");
         tpassword.setConstraint(TextField.PASSWORD);
-        ////////////////////
+        passwordStyle.setMargin(Component.TOP, 2);
+        
+////////////////////
         
           TextField tpassword0 = new TextField();
         Style passwordStyle0 = tpassword0.getAllStyles();
@@ -102,7 +104,7 @@ public class ResetPwdCode extends Form {
         tpassword0.setHint("Nouveau mot de passe");
         tpassword0.setConstraint(TextField.PASSWORD);
 
-        passwordStyle0.setMargin(Component.TOP, 12);
+        passwordStyle0.setMargin(Component.TOP, 13);
         
         cnt2.addAll(tpassword0);
         cnt3.add(tpassword);
@@ -123,8 +125,8 @@ public class ResetPwdCode extends Form {
 
       
         butStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
-        butStyle.setMargin(Component.BOTTOM, 3);
-        butStyle.setMargin(Component.TOP, 5);
+        butStyle.setMargin(Component.BOTTOM, 7);
+        butStyle.setMargin(Component.TOP, 7);
         butStyle.setMargin(Component.LEFT, 10);
         butStyle.setMargin(Component.RIGHT, 10);
         //cnt5.add(btnval);
@@ -160,15 +162,17 @@ public class ResetPwdCode extends Form {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if ((tpassword0.getText().length() == 0) || (tpassword.getText().length() == 0)) {
-                    Dialog.show("Alert", "vous devez saisir votre username et mot de passe", new Command("OK"));
-                } else {
+                    Dialog.show("Alert", "vous devez Remplir tt les champs", new Command("OK"));
+                } else {System.out.println("error related to sql : (" +tpassword.getText());
                         if(tpassword0.getText().equals(tpassword.getText()))
-                        {    User u = UserService.getInstance().passwordreset(jj, tpassword.getText());
-                              new profil(u.getId()).show(); 
-                              Dialog.show("ERROR", "le mot de passe changer avec succée", new Command("OK"));}
-                         else  {
-                        Dialog.show("ERROR", "la verifiacation est incorrect", new Command("OK"));}         
+                        {    User u = UserService.getInstance().passwordreset("admin@gmail.com", tpassword.getText());
+                              Dialog.show("Succés", "le mot de passe est changé", new Command("OK"));
+                                            new Login().show();
 
+                        }
+                         else  {
+                        Dialog.show("ERROR", "la verifiacation est incorrect", new Command("OK"));                    
+                        }                   
                 }
             }
             
@@ -182,7 +186,7 @@ public class ResetPwdCode extends Form {
                     
                 try {                        
                     new  Login().show();
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                 }
                    
 
@@ -213,7 +217,21 @@ public class ResetPwdCode extends Form {
             }
         });
         
-        
+          login.addActionListener (new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                try {                        
+                    new  Login().show();
+                } catch (Exception ex) {
+                }
+                   
+            }
+        });
+              
+        /**
+         * ***********************************************************************************************
+         */
+      
         /**
          * ***********************************************************************************************
          */

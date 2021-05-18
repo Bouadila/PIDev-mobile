@@ -3,7 +3,11 @@
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
     <image name="account.jpg"  />
     <image name="back.jpg"  />
+    <image name="icons8_user_50px.png"  />
+    <image name="office.png"  />
+    <image name="person_3.jpg"  />
     <image name="recruitini-logo.png"  />
+    <image name="team.jpg"  />
     <theme name="Theme">
         <val key="@includeNativeBool" value="true" />
     </theme>

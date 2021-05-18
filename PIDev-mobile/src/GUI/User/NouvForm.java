@@ -5,6 +5,9 @@
  */
 package GUI.User;
 
+import Entities.User;
+import static GUI.User.Login.userexist;
+import com.codename1.components.ImageViewer;
 import com.codename1.ui.Form;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
@@ -19,6 +22,7 @@ import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.RadioButton;
+import com.codename1.ui.Stroke;
 import com.codename1.ui.Tabs;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.Toolbar;
@@ -27,33 +31,40 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.plaf.RoundRectBorder;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import static com.mycompany.ListSerie.MyApplication.theme;
+import java.io.IOException;
+import services.UserService;
 /**
  *
  * @author USER
  */
 public class NouvForm extends Form  {
-    
-     Form current;
-    
-       public NouvForm() {
-        super("Newsfeed", BoxLayout.y());
-        Toolbar tb = new Toolbar(true);
-        setToolbar(tb);
-        getTitleArea().setUIID("Container");
-        setTitle("Newsfeed");
-        getContentPane().setScrollVisible(false);
-        
-        tb.addSearchCommand(e -> {});
+    Form current;
+    public NouvForm(){
+                setTitle("Compte");
+        setLayout(BoxLayout.y());
+        getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_PUBLIC, e -> {
+        });
+                Style loginStyle = getAllStyles();
+          User listu = UserService.getInstance().profilUser(12);
+
+           ImageViewer Logo1 = null;
+        try {
+            Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
+        } catch (IOException ex) {
+        }
+        loginStyle.setBgImage(Logo1.getImage());
+//        super.addSideMenu(theme);
         
         Tabs swipe = new Tabs();
 
         Label spacer1 = new Label();
         Label spacer2 = new Label();
-        addTab(swipe, theme.getImage("back.jpg"), spacer1, "15 Likes  ", "85 Comments", "Integer ut placerat purued non dignissim neque. ");
-        addTab(swipe, theme.getImage("account.jpg"), spacer2, "100 Likes  ", "66 Comments", "Dogs are cute: story at 11");
+        addTab(swipe, theme.getImage("office.png"), spacer1, "15 J'aimes  ", "85 Commentaire", " ");
+        addTab(swipe, theme.getImage("back.jpg"), spacer2, "100 J'aimes  ", "66 Commentaire", "");
                 
         swipe.setUIID("Container");
         swipe.getContentPane().setUIID("Container");
@@ -93,43 +104,157 @@ public class NouvForm extends Form  {
         Component.setSameSize(radioContainer, spacer1, spacer2);
         add(LayeredLayout.encloseIn(swipe, radioContainer));
         
-        ButtonGroup barGroup = new ButtonGroup();
-        RadioButton all = RadioButton.createToggle("All", barGroup);
-        all.setUIID("SelectBar");
-        RadioButton featured = RadioButton.createToggle("Featured", barGroup);
-        featured.setUIID("SelectBar");
-        RadioButton popular = RadioButton.createToggle("Popular", barGroup);
-        popular.setUIID("SelectBar");
-        RadioButton myFavorite = RadioButton.createToggle("My Favorites", barGroup);
-        myFavorite.setUIID("SelectBar");
-        Label arrow = new Label(theme.getImage("account.jpg"), "Container");
-        
+      
         add(LayeredLayout.encloseIn(
-                GridLayout.encloseIn(4, all, featured, popular, myFavorite),
-                FlowLayout.encloseBottom(arrow)
+                GridLayout.encloseIn(4)
         ));
+ImageViewer Logo = null;
+        try {
+            Logo = new ImageViewer(Image.createImage("/recruitini-logo.png"));
+        } catch (IOException ex) {
+        }
+       
+        loginStyle.setBgImage(Logo1.getImage());
+                Container c9 = new Container(BoxLayout.x());
+c9.add(Logo);
         
-        all.setSelected(true);
-        arrow.setVisible(false);
-        addShowListener(e -> {
-            arrow.setVisible(true);
-            updateArrowPosition(all, arrow);
-        });
-        bindButtonSelection(all, arrow);
-        bindButtonSelection(featured, arrow);
-        bindButtonSelection(popular, arrow);
-        bindButtonSelection(myFavorite, arrow);
+        Container c0 = new Container(BoxLayout.x());
+        Label lbemail = new Label("Adress Email  :  "+listu.getEmail());
+        Style userStyle = lbemail.getAllStyles();
+        userStyle.setBorder(RoundRectBorder.create().
+                strokeOpacity(120));
+        userStyle.setFgColor(0xffffff);
+        userStyle.setMargin(Component.BOTTOM, 0);
+        userStyle.setMargin(Component.TOP, 0);
+
+        userStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
+        c0.add(lbemail);
+
+        Container c1 = new Container(BoxLayout.x());
+        Label lbusername = new Label("Nom  :  "+listu.getName());
+        Style userStyle1 = lbusername.getAllStyles();
+        userStyle1.setBorder(RoundRectBorder.create().
+                strokeOpacity(120));
+        userStyle1.setFgColor(0xffffff);
+        userStyle1.setMargin(Component.BOTTOM, 0);
+        userStyle1.setMargin(Component.TOP, 0);
+
+        userStyle1.setMarginUnit(Style.UNIT_TYPE_DIPS);
+        c1.add(lbusername);        
         
-        // special case for rotation
-        addOrientationListener(e -> {
-            updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
-        });
+        Container c3 = new Container(BoxLayout.x());
+        Label lbprenom = new Label("Prenom  :  "+listu.getPrenom());
+        Style userStyle3 = lbprenom.getAllStyles();
+        userStyle3.setBorder(RoundRectBorder.create().
+                strokeOpacity(120));
+        userStyle3.setFgColor(0xffffff);
+        userStyle3.setMarginUnit(Style.UNIT_TYPE_DIPS);
+                userStyle3.setMargin(Component.BOTTOM, 0);
+        userStyle3.setMargin(Component.TOP, 0);
+
+        c3.add(lbprenom);
         
-     }
+        Container c4 = new Container(BoxLayout.x());
+        Label lbimg = new Label("Role  :  "+listu.getRoles());
+        Style userStyle4 = lbimg.getAllStyles();
+        userStyle4.setBorder(RoundRectBorder.create().
+                strokeOpacity(120));
+        userStyle4.setFgColor(0xffffff);
+         userStyle4.setMargin(Component.BOTTOM, 0);
+         userStyle4.setMargin(Component.TOP, 0);
+     
+        userStyle4.setMarginUnit(Style.UNIT_TYPE_DIPS);
+        c4.add(lbimg);
+        
+        Container c5 = new Container(BoxLayout.x());
+        Label lbgover = new Label("Governorat  :  "+listu.getGover());
+        Style userStyle5 = lbgover.getAllStyles();
+        userStyle5.setBorder(RoundRectBorder.create().
+                strokeOpacity(120) );
+        userStyle5.setFgColor(0xffffff);
+        userStyle5.setMargin(Component.BOTTOM, 0);
+         userStyle5.setMargin(Component.TOP, 0);
+
+        userStyle5.setMarginUnit(Style.UNIT_TYPE_DIPS);
+        c5.add(lbgover);
+     
+        Container c6 = new Container(BoxLayout.x());
+        Label lbspecial = new Label("Specialité  :  "+listu.getSpecial());
+        Style userStyle6 = lbspecial.getAllStyles();
+        userStyle6.setBorder(RoundRectBorder.create().
+                strokeOpacity(120));
+        userStyle6.setMargin(Component.BOTTOM, 0);
+         userStyle6.setMargin(Component.TOP, 0);
+
+        userStyle6.setFgColor(0xffffff);
+        userStyle6.setMarginUnit(Style.UNIT_TYPE_DIPS);
+        c6.add(lbspecial);
+
+
+       
+        Container cnt1 = new Container(new FlowLayout(CENTER, CENTER));
+        Container c_f = new Container(BoxLayout.y());
+
+        Button btValider = new Button("Modifer");
+        Style butStyle = btValider.getAllStyles();
+        butStyle.setBorder(RoundRectBorder.create().
+        strokeColor(0x00000).
+        strokeOpacity(120) );
+        butStyle.setBgColor(0x9b0244);
+        butStyle.setBgTransparency(255);
+        butStyle.setFgColor(0xffffff);
+         butStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
+        butStyle.setMargin(Component.BOTTOM, 1);
+        butStyle.setMargin(Component.TOP, 0);
+        butStyle.setMargin(Component.LEFT, 0);
+        
+       Button btValider0 = new Button("Désactiver");
+        Style butStyle0 = btValider0.getAllStyles();
+        butStyle0.setBorder(RoundRectBorder.create().
+        strokeColor(0x00000).
+        strokeOpacity(120) );
+        butStyle0.setBgColor(0x9b0244);
+        butStyle0.setBgTransparency(255);
+        butStyle0.setFgColor(0xffffff);
+        butStyle0.setMarginUnit(Style.UNIT_TYPE_DIPS);
+        butStyle0.setMargin(Component.BOTTOM, 1);
+        butStyle0.setMargin(Component.TOP, 0);
+        butStyle0.setMargin(Component.RIGHT, 0);
+        cnt1.addAll(btValider,btValider0);
+          Style Stylec = cnt1.getAllStyles();
+        Stylec.setBorder(RoundRectBorder.create().
+        strokeColor(0x00000).
+        strokeOpacity(120) );
+        Stylec.setBgColor(0x9b0244);
+        Stylec.setBgTransparency(255);
+        Stylec.setFgColor(0xffffff);
+        Stylec.setMarginUnit(Style.UNIT_TYPE_DIPS);
+        Stylec.setMargin(Component.BOTTOM, 1);
+        Stylec.setMargin(Component.TOP, 0);
+        Stylec.setMargin(Component.RIGHT, 0);
+                Stylec.setMargin(Component.LEFT, 0);
+
+            c_f.addAll(cnt1,c9,c1,c3,c0,c4,c5,c6);
+        
+        add(c_f);       
+        getToolbar().addCommandToOverflowMenu("Exit",
+                null, ev -> {
+                    Display.getInstance().exitApplication();
+                });
+        getToolbar().addCommandToOverflowMenu("Login",
+                null, ev -> {
+                    try {
+                        new Login().show();
+                    } catch (Exception ex) {
+
+                    }
+                });
+        
     
-    private void updateArrowPosition(Button b, Label arrow) {
-        arrow.getUnselectedStyle().setMargin(LEFT, b.getX());
-        arrow.getParent().repaint();
+        
+        
+        
+        
         
         
     }
@@ -149,7 +274,7 @@ public class NouvForm extends Form  {
         Label comments = new Label(commentsStr);
         FontImage.setMaterialIcon(comments, FontImage.MATERIAL_CHAT);
         if(img.getHeight() > Display.getInstance().getDisplayHeight() / 2) {
-            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 2);
+            img = img.scaledHeight((int) (Display.getInstance().getDisplayHeight() / 2.5));
         }
         ScaleImageLabel image = new ScaleImageLabel(img);
         image.setUIID("Container");
@@ -171,47 +296,7 @@ public class NouvForm extends Form  {
 
         swipe.addTab("", page1);
     }
-    
-   private void addButton(Image img, String title, boolean liked, int likeCount, int commentCount) {
-       int height = Display.getInstance().convertToPixels(11.5f);
-       int width = Display.getInstance().convertToPixels(14f);
-       Button image = new Button(img.fill(width, height));
-       image.setUIID("Label");
-       Container cnt = BorderLayout.west(image);
-       cnt.setLeadComponent(image);
-       TextArea ta = new TextArea(title);
-       ta.setUIID("NewsTopLine");
-       ta.setEditable(false);
-
-       Label likes = new Label(likeCount + " Likes  ", "NewsBottomLine");
-       likes.setTextPosition(RIGHT);
-       if(!liked) {
-           FontImage.setMaterialIcon(likes, FontImage.MATERIAL_FAVORITE);
-       } else {
-           Style s = new Style(likes.getUnselectedStyle());
-           s.setFgColor(0xff2d55);
-           FontImage heartImage = FontImage.createMaterial(FontImage.MATERIAL_FAVORITE, s);
-           likes.setIcon(heartImage);
-       }
-       Label comments = new Label(commentCount + " Comments", "NewsBottomLine");
-       FontImage.setMaterialIcon(likes, FontImage.MATERIAL_CHAT);
-       
-       
-       cnt.add(BorderLayout.CENTER, 
-               BoxLayout.encloseY(
-                       ta,
-                       BoxLayout.encloseX(likes, comments)
-               ));
-       add(cnt);
-       image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
-   }
-    
-    private void bindButtonSelection(Button b, Label arrow) {
-        b.addActionListener(e -> {
-            if(b.isSelected()) {
-                updateArrowPosition(b, arrow);
-            }
-        });
     }
-}
+    
+
 

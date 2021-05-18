@@ -1,7 +1,9 @@
 package com.mycompany.ListSerie;
 
 
+import GUI.User.ActiveUser;
 import GUI.User.Login;
+import GUI.User.NouvForm;
 import GUI.User.ResetPwd;
 import GUI.User.ResetPwdCode;
 import static com.codename1.ui.CN.*;
@@ -50,9 +52,9 @@ public class MyApplication {
     }
     
     public void start() {
-        new ResetPwdCode().show();
+//        new ResetPwdCode().show();
         
-//            new Login().show();
+            new Login().show();
     }
 
     public void stop() {

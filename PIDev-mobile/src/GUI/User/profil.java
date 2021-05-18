@@ -7,18 +7,26 @@ package GUI.User;
 
 import Entities.User;
 import static GUI.User.Login.idaffiche;
+import static GUI.User.Login.idlogin;
 import com.codename1.components.ImageViewer;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Display;
 import com.codename1.ui.Font;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.RoundRectBorder;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.util.Resources;
+import static com.mycompany.ListSerie.MyApplication.theme;
 import java.io.IOException;
 import services.UserService;
 import static services.UserService.a;
@@ -36,25 +44,15 @@ public class profil  extends Form {
         Style loginStyle = getAllStyles();
       
 
-            // System.out.println("id="+id);
-//        ImageViewer BG = null;
-//        try {
-//            BG = new ImageViewer(Image.createImage("/recruitini-logo.jpg"));
-//        } catch (IOException ex) {
-//        }
- ImageViewer Logo1 = null;
+          
+        ImageViewer Logo1 = null;
         try {
             Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
         } catch (IOException ex) {
         }
         loginStyle.setBgImage(Logo1.getImage());
-        
-//        loginStyle.setBgImage(BG.getImage());
-//        /**
-//         * ***********************************************************************************************
-//         */
-//
-   ImageViewer Logo = null;
+
+        ImageViewer Logo = null;
         try {
             Logo = new ImageViewer(Image.createImage("/recruitini-logo.png"));
         } catch (IOException ex) {
@@ -72,8 +70,8 @@ public class profil  extends Form {
         /**
          * ***********************************************************************************************
          */
-            Button btRESERVATION = new Button("profil");
-        Style butStyle = btRESERVATION.getAllStyles();
+            Button btLogout = new Button("Se déconnecter");
+        Style butStyle = btLogout.getAllStyles();
         butStyle.setBorder(RoundRectBorder.create().
                 strokeColor(0x9b0244).
                 strokeOpacity(120)
@@ -91,7 +89,7 @@ public class profil  extends Form {
          * ***********************************************************************************************
          */
         
-        Button btCOURSES = new Button("liliii");
+        Button btCOURSES = new Button("Quiz");
         Style butStyle1 = btCOURSES.getAllStyles();
         butStyle1.setBorder(RoundRectBorder.create().
                 strokeColor(0x9b0244).
@@ -109,7 +107,7 @@ public class profil  extends Form {
         /**
          * ***********************************************************************************************
          */
-        Button btABOONNEMENTS = new Button("modifier compte");
+        Button btABOONNEMENTS = new Button("Modifier profile");
         Style butStyle2 = btABOONNEMENTS.getAllStyles();
         butStyle2.setBorder(RoundRectBorder.create().
                 strokeColor(0x9b0244).
@@ -119,7 +117,6 @@ public class profil  extends Form {
         butStyle2.setBgTransparency(255);
         butStyle2.setMarginUnit(Style.UNIT_TYPE_DIPS);
         butStyle2.setMargin(Component.BOTTOM, 3);
-
         butStyle2.setMargin(Component.TOP, 1);
 
         butStyle2.setMargin(Component.LEFT, 10);
@@ -127,18 +124,17 @@ public class profil  extends Form {
         /**
          * ***********************************************************************************************
          */
-        Button btFEEDBACK = new Button("Compte user");
-        Style butStyle3 = btFEEDBACK.getAllStyles();
+        Button btCompteUser = new Button("Profile");
+        Style butStyle3 = btCompteUser.getAllStyles();
         butStyle3.setBorder(RoundRectBorder.create().
                 strokeColor(0x9b0244).
-                strokeOpacity(120)
-        );
+                strokeOpacity(120));
 
         butStyle3.setBgTransparency(255);
         butStyle3.setMarginUnit(Style.UNIT_TYPE_DIPS);
         butStyle3.setMargin(Component.BOTTOM, 3);
 
-        butStyle3.setMargin(Component.TOP, 1);
+        butStyle3.setMargin(Component.TOP,13);
 
         butStyle3.setMargin(Component.LEFT, 10);
         butStyle3.setMargin(Component.RIGHT, 10);
@@ -167,7 +163,7 @@ public class profil  extends Form {
         /**
          * ***********************************************************************************************
          */
-        addAll( Logo, btProfil,btRESERVATION, btCOURSES, btABOONNEMENTS, btFEEDBACK);
+        addAll( Logo,btCompteUser,btABOONNEMENTS,btLogout,btProfil);
 
         /**
          * ***********************************************************************************************
@@ -175,37 +171,38 @@ public class profil  extends Form {
         btProfil.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-          String activU = UserService.getInstance().desactiveUser(idaffiche);
+          String activU = UserService.getInstance().desactiveUser(idlogin);
+    try {
+                        a =1;
+                        new Login().show();
+                    } catch (Exception ex) {
+
+                    }
+            }
+        });
+        
+         btLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                try {a =1;
+                    new Login().show();
+                } catch (Exception ex) {
+                }
     
             }
         });
           
-//        btRESERVATION.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent evt) {
-//
-//                new Reservation().start(id);
-//
-//            }
-//        });
-//        btCOURSES.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent evt) {
-//                new CoursesGUI().start(id);
-//
-//            }
-//        });
         btABOONNEMENTS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-        new modif().show();
+        new modif(id).show();
 
             }
         });
-        btFEEDBACK.addActionListener(new ActionListener() {
+        btCompteUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-        new profil(idaffiche).show();
+        new compte().show();
             }
         });
 
@@ -217,18 +214,44 @@ public class profil  extends Form {
                     try {
                         a =1;
                         new Login().show();
-                    } catch (IOException ex) {
+                    } catch (Exception ex) {
 
                     }
                 });
-          getToolbar().addCommandToOverflowMenu("compte",
-                null, ev -> {
-        new compte().show();
-                });
+        
         getToolbar().addCommandToOverflowMenu("Exit",
                 null, ev -> {
                     Display.getInstance().exitApplication();
                 });
 
+    }
+      public  void addSideMenu(Resources res) {
+        Toolbar tb = getToolbar();
+        Image img = res.getImage("recruitini-logo.png");
+        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
+        }
+        ScaleImageLabel sl = new ScaleImageLabel(img);
+        sl.setUIID("BottomPad");
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        
+        tb.addComponentToSideMenu(LayeredLayout.encloseIn(
+                sl,
+                FlowLayout.encloseCenterBottom()
+        ));
+        
+        tb.addMaterialCommandToSideMenu("Desactiver compte ", FontImage.MATERIAL_UPDATE, e -> { String activU = UserService.getInstance().desactiveUser(idlogin);
+    try {         System.out.println("idaffiche profil : " +idaffiche);
+
+                        a =1;
+                        new Login().show();
+                    } catch (Exception ex) {
+
+                    }});
+        tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> {  try {a =1;
+                    new Login().show();
+                } catch (Exception ex) {
+                }});
+        
     }
 }

@@ -40,11 +40,12 @@ import static services.UserService.a;
  * @author USER
  */
 public class Login  extends Form {
-     Form current;
- static  int userexist; 
- public static  int idaffiche;
-
-    public Login() throws IOException {
+    Form current;
+    static  int userexist; 
+    public static  int idaffiche;
+    public static  int idlogin;
+    public Login() {
+        
         current = this;
         setTitle("Se connecter");
         setLayout(BoxLayout.y());
@@ -52,25 +53,20 @@ public class Login  extends Form {
         getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_PUBLIC, e -> {
         });
         Style loginStyle = getAllStyles();
-
         Container cnt1 = new Container(new FlowLayout(Container.CENTER));
         Container cnt4 = new Container(new FlowLayout(Container.CENTER));
         Container cnt5 = new Container(new FlowLayout(Container.CENTER));
-
         Container cnt2 = new Container(new FlowLayout(Container.CENTER));
         Container cnt3 = new Container(new FlowLayout(Container.CENTER));
         ImageViewer Logo = null;
         try {
-            Logo = new ImageViewer(Image.createImage("/recruitini-logo.png"));
+        Logo = new ImageViewer(Image.createImage("/recruitini-logo.png"));
         } catch (IOException ex) {
         }
         ImageViewer Logo1 = null;
-        try {
-            Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
+        try { Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
         } catch (IOException ex) {
-        }
-        loginStyle.setBgImage(Logo1.getImage());
-
+        }  loginStyle.setBgImage(Logo1.getImage());
 
         /**
          * ***********************************************************************************************
@@ -105,24 +101,22 @@ public class Login  extends Form {
                 stroke(borderStroke));
         passwordStyle.setBgColor(0xffffff);
         passwordStyle.setBgTransparency(255);
-
         tpassword.setHint(" Mot de passe");
         tpassword.setConstraint(TextField.PASSWORD);
         cnt2.addAll(Username);
         cnt3.add(tpassword);
-        cnt1.add(Logo);
+        cnt1.add(Logo);       
         /**
          * ***********************************************************************************************
-         */
+         */  
         Button btnval = new Button("Se connecter ");
         Style butStyle = btnval.getAllStyles();
         butStyle.setBorder(RoundRectBorder.create().
                 strokeColor(0x00000).
                 strokeOpacity(120).
                 stroke(borderStroke));
-       butStyle.setBgColor(0x9b0244);
-       butStyle.setBgTransparency(255);
-    
+        butStyle.setBgColor(0x9b0244);
+        butStyle.setBgTransparency(255);
         butStyle.setFgColor(0xffffff);
         butStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
         butStyle.setMargin(Component.BOTTOM, 3);
@@ -140,16 +134,13 @@ public class Login  extends Form {
         butStyle1.setBgTransparency(0);
         butStyle1.setMarginUnit(Style.UNIT_TYPE_DIPS);
         butStyle1.setMargin(Component.TOP, 10);
-
- 
         cnt5.add(motOublier);
         /**
          * ***********************************************************************************************
          */
         Button inscrire = new Button("s'inscrire");
         Style butStyle2 = inscrire.getAllStyles();
-
-     butStyle2.setFgColor(0xffffff);
+        butStyle2.setFgColor(0xffffff);
         butStyle2.setBgTransparency(0);
         butStyle2.setMarginUnit(Style.UNIT_TYPE_DIPS);
         butStyle2.setMargin(Component.TOP, 0);
@@ -159,85 +150,70 @@ public class Login  extends Form {
         addAll(cnt1, cnt2, cnt3, btnval, cnt5, inscrire);
         /**
          * ***********************************************************************************************
-         */
-        
-        //activetoken
-        
-        
+         */      
+
         btnval.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if ((Username.getText().length() == 0) || (tpassword.getText().length() == 0)) {
+                    if ((Username.getText().length() == 0) || (tpassword.getText().length() == 0)) {
                     Dialog.show("Alert", "vous devez saisir votre email et mot de passe", new Command("OK"));
-                } else {           
-
-                        User u = UserService.getInstance().SignIn(Username.getText(), tpassword.getText());
-                   
-                          if((a==1)|| (u.getId()== 0))
-                        {       
-                         Dialog.show("ERROR", "Mot de passe ou email incorrect ", new Command("OK"));
+                    } else 
+                    {           
+                        User u = UserService.getInstance().SignIn(Username.getText(), tpassword.getText());    
+                        if((a==1)|| (u.getId()== 0))
+                        {Dialog.show("ERROR", "Mot de passe ou email incorrect ", new Command("OK"));
                         userexist=0;  
-                         } else {
+                        } else {
                         String use = UserService.getInstance().activetoken(Username.getText());
                         String actU = UserService.getInstance().activeetat(Username.getText());
                         String reactU = UserService.getInstance().reactiverCompte(u.getId());                       
-
-                        idaffiche = u.getId();                  
-                            if( (use.equals("existe")))
-                                {   userexist=1;    
-                                    if(actU.equals("active"))
-                                        { new  profil(u.getId()).show();              
-                                        } else{
-                                    Dialog.show("Compte désactiver", "vous voulez reactiver votre compte ", new Command(reactU),new Command("cancel"));                
-                                        }
-                                    }                                   
-                            else                           
-                            {Dialog.show("ERROR", "Mot de passe ou email incorrect", new Command("OK"));
-                            userexist=0;
-                            }
-                    }
-            }}
+                        
+                        idaffiche = u.getId(); 
+                        idlogin= u.getId(); 
+                        if( (use.equals("existe")))
+                                { userexist = 1;    
+                                if(actU.equals("active"))
+                                { new  profil(idaffiche).show();              
+                                } else{
+                                Dialog.show("Compte désactiver", "vous voulez reactiver votre compte ", new Command(reactU),new Command("cancel"));                
+                                } }                                   
+                        else  {Dialog.show("ERROR", "Mot de passe ou email incorrect", new Command("OK"));
+                            userexist=0;  }  
+                        }}}
         });
-        
-        
-          motOublier.addActionListener (new ActionListener(){
+
+            motOublier.addActionListener (new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent evt) {
-               
                     try {
-                         new  ResetPwd().show();                        
+                    new  ResetPwd().show();                        
                     } catch (NumberFormatException e) {
-                        Dialog.show("ERROR", "Status must be a number", new Command("OK"));
-                    }
-            }
-        });
+                    Dialog.show("ERROR", "Status must be a number", new Command("OK"));
+                    } }  });
               
         /**
          * ***********************************************************************************************
          */
-              inscrire.addActionListener(new ActionListener() {
+            inscrire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-               
                     try {
                         User u = UserService.getInstance().SignIn(Username.getText(), tpassword.getText());                      
-                              new Register().show();                        
-                    } catch (NumberFormatException e) {
+                        new Register().show();                        
+                        } catch (NumberFormatException e) {
                         Dialog.show("ERROR", "Status must be a number", new Command("OK"));
-                    }                
-            }
+                        }       }
         });
                
         /**
          * ***********************************************************************************************
          */
         getToolbar().addCommandToOverflowMenu("Exit",
-                null, ev -> {
-                    Display.getInstance().exitApplication();
+                null, ev -> { Display.getInstance().exitApplication();
                 });  
-    }   
+        } 
     
-           protected void addSideMenu(Resources res) {
+        public  void addSideMenu(Resources res) {
         Toolbar tb = getToolbar();
         Image img = res.getImage("recruitini-logo.png");
         if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
@@ -252,9 +228,18 @@ public class Login  extends Form {
                 FlowLayout.encloseCenterBottom()
         ));
         
-        tb.addMaterialCommandToSideMenu("Quiz", FontImage.MATERIAL_UPDATE, e -> {new compte().show();});
-        tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> {});
-        tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> {});
+        tb.addMaterialCommandToSideMenu("Desactiver compte ", FontImage.MATERIAL_UPDATE, e -> { String activU = UserService.getInstance().desactiveUser(idlogin);
+    try {
+                        a =1;
+                        new Login().show();
+                    } catch (Exception ex) {
+
+                    }});
+        tb.addMaterialCommandToSideMenu("Compte", FontImage.MATERIAL_SETTINGS, e -> {  new compte().show();});
+        tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> {  try {a =1;
+                    new Login().show();
+                } catch (Exception ex) {
+                }});
     }
 }
 

@@ -37,8 +37,8 @@ public class BaseForm extends Form {
     public void installSidemenu(Resources res) {
         Image selection = res.getImage("selection-in-sidemenu.png");
         
-        Image inboxImage = null;
-        if(isCurrentInbox()) inboxImage = selection;
+        Image CandidatOffre = null;
+        if(isCurrentCandidatOffre()) CandidatOffre = selection;
 
         Image trendingImage = null;
         if(isCurrentTrending()) trendingImage = selection;
@@ -63,6 +63,7 @@ public class BaseForm extends Form {
 //        inboxButton.addActionListener(e -> new InboxForm().show());
 //        getToolbar().addComponentToSideMenu(inbox);
         getToolbar().addCommandToSideMenu("Offre",offreImage, e -> {new ShowOffreForm().show();});
+        getToolbar().addCommandToSideMenu("Offre Candidat", CandidatOffre, e ->{new ShowCandidatOffreForm().show();});
         getToolbar().addCommandToSideMenu("Formation", statsImage, e -> {});
         getToolbar().addCommandToSideMenu("Noter Rendez Vous", calendarImage, e -> new CalendarForm(res).show());
         getToolbar().addCommandToSideMenu("Contact", null, e -> {});
@@ -78,7 +79,7 @@ public class BaseForm extends Form {
     }
 
         
-    protected boolean isCurrentInbox() {
+    protected boolean isCurrentCandidatOffre() {
         return false;
     }
     

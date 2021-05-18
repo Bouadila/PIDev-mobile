@@ -5,9 +5,15 @@
  */
 package com.mycompany.pidevapp.gui;
 
+import com.codename1.components.FloatingActionButton;
+import com.codename1.components.ImageViewer;
+import com.codename1.components.ScaleImageButton;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
 import com.codename1.ui.Container;
+import com.codename1.ui.FontImage;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.RadioButton;
 import com.codename1.ui.TextComponent;
@@ -15,7 +21,11 @@ import com.codename1.ui.TextField;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.plaf.RoundBorder;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.table.TableLayout;
+import com.codename1.ui.validation.LengthConstraint;
+import com.codename1.ui.validation.Validator;
 import com.mycompany.pidevapp.entities.Question;
 import com.mycompany.pidevapp.entities.Quiz;
 import com.mycompany.pidevapp.services.ServiceQuiz;
@@ -38,10 +48,11 @@ public class QuizAddForm extends BaseForm {
         );
 
         ServiceQuiz sq = new ServiceQuiz();
-
         Container con = new Container();
 
         TextComponent titre = new TextComponent().label("Titre");
+        Validator val = new Validator();
+        val.addConstraint(titre, new LengthConstraint(4));
         con.add(titre);
         TextField tf = new TextField();
         TextField tf1 = new TextField();
@@ -71,9 +82,24 @@ public class QuizAddForm extends BaseForm {
         int nbr = 2;
         TextComponent text = new TextComponent().label("Contenu");
 
-        Button btn2 = new Button("-");
-        Button btn1 = new Button("-");
+        FloatingActionButton plus = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
+        Button btn1 = new Button();
+        Button btn2 = new Button();
 
+        Style closeStyle = btn1.getAllStyles();
+        closeStyle.setFgColor(0xffffff);
+        closeStyle.setBgTransparency(0);
+        closeStyle.setPaddingUnit(Style.UNIT_TYPE_DIPS);
+        closeStyle.setPadding(3, 3, 3, 3);
+        closeStyle.setBorder(RoundBorder.create().color(16755083));
+        FontImage.setMaterialIcon(btn1, FontImage.MATERIAL_CLOSE);
+        Style btn21 = btn2.getAllStyles();
+        btn21.setFgColor(0xffffff);
+        btn21.setBgTransparency(0);
+        btn21.setPaddingUnit(Style.UNIT_TYPE_DIPS);
+        btn21.setPadding(3, 3, 3, 3);
+        btn21.setBorder(RoundBorder.create().color(16755083));
+        FontImage.setMaterialIcon(btn2, FontImage.MATERIAL_CLOSE);
         btnFinish.addActionListener(e -> {
 
             Question ques = new Question();
@@ -155,8 +181,7 @@ public class QuizAddForm extends BaseForm {
 
         });
 
-        Button plus = new Button("+");
-
+        setScrollable(true);
         plus.addActionListener(e -> {
             int nombre = Integer.parseInt(tf.getText());
             if (nombre > 4) {

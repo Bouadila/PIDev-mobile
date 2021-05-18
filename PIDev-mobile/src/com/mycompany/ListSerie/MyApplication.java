@@ -1,6 +1,9 @@
 package com.mycompany.ListSerie;
 
 
+import GUI.Candidature.AfficherCandidature;
+import GUI.Candidature.AjouterCandidature;
+import GUI.Candidature.ModifierCandidature;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
@@ -51,22 +54,15 @@ public class MyApplication {
             current.show();
             return;
         }
-//        Form hi = new Form("Hi World", BoxLayout.y());
-//        hi.add(new Label("Hi World"));
-//        hi.show();
 
-
-//            AjouterFormation AF=new AjouterFormation(res);
-//            AF.show();
             
-          //new AjouterCandidature(theme).show();
+          new AjouterCandidature(theme).show();
             
-          //  new AfficherCandidature(theme).show();
+          //new AfficherCandidature(theme).show();
            
           // new ModifierCandidature(theme).show();
             
-//            AfficherFormation AfF=new AfficherFormation();
-//            AfF.show();
+
     }
 
     public void stop() {

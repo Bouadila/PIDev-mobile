@@ -54,12 +54,12 @@ public class MyApplication {
             return;
         }
 
-//        ShowOffreForm fo = new ShowOffreForm();
-//        fo.show();
+        ShowOffreForm fo = new ShowOffreForm();
+        fo.show();
 
 //        new ResetPwdCode().show();
         
-            new Login().show();
+//            new Login().show();
 
     }
 

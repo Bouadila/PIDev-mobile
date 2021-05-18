@@ -52,25 +52,23 @@ public class BaseForm extends Form {
         Image offreImage = null;
         if(isCurrentOffre()) offreImage = selection;
         
-        Image NoterRendezVousImage = null;
-        if(isCurrentNoterRendezVous()) NoterRendezVousImage = selection;
-        
-        Button inboxButton = new Button("Inbox", inboxImage);
-        inboxButton.setUIID("SideCommand");
-        inboxButton.getAllStyles().setPaddingBottom(0);
-        Container inbox = FlowLayout.encloseMiddle(inboxButton, 
-                new Label("18", "SideCommandNumber"));
-        inbox.setLeadComponent(inboxButton);
-        inbox.setUIID("SideCommand");
-        inboxButton.addActionListener(e -> new InboxForm().show());
-        getToolbar().addComponentToSideMenu(inbox);
-        
-        getToolbar().addCommandToSideMenu("Stats", statsImage, e -> new StatsForm(res).show());
-        getToolbar().addCommandToSideMenu("Calendar", calendarImage, e -> new CalendarForm(res).show());
-        getToolbar().addCommandToSideMenu("Map", null, e -> {});
-        getToolbar().addCommandToSideMenu("Trending", trendingImage, e -> new TrendingForm(res).show());
+    
+//        Button inboxButton = new Button("Inbox", inboxImage);
+//        inboxButton.setUIID("SideCommand");
+//        inboxButton.getAllStyles().setPaddingBottom(0);
+//        Container inbox = FlowLayout.encloseMiddle(inboxButton, 
+//                new Label("18", "SideCommandNumber"));
+//        inbox.setLeadComponent(inboxButton);
+//        inbox.setUIID("SideCommand");
+//        inboxButton.addActionListener(e -> new InboxForm().show());
+//        getToolbar().addComponentToSideMenu(inbox);
         getToolbar().addCommandToSideMenu("Offre",offreImage, e -> {new ShowOffreForm().show();});
-        getToolbar().addCommandToSideMenu("NoterRendezVous", NoterRendezVousImage, e -> new NoterRendezVousForm().show());
+        getToolbar().addCommandToSideMenu("Formation", statsImage, e -> {});
+        getToolbar().addCommandToSideMenu("Noter Rendez Vous", calendarImage, e -> new CalendarForm(res).show());
+        getToolbar().addCommandToSideMenu("Contact", null, e -> {});
+        getToolbar().addCommandToSideMenu("Profil", trendingImage, e ->{});
+        
+   
         
         // spacer
         getToolbar().addComponentToSideMenu(new Label(" ", "SideCommand"));
@@ -99,7 +97,5 @@ public class BaseForm extends Form {
     protected boolean isCurrentOffre() {
         return false;
     }
-     protected boolean isCurrentNoterRendezVous() {
-        return false;
-    }
+   
 }

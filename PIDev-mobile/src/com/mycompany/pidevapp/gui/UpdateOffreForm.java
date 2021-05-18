@@ -11,23 +11,16 @@ import com.codename1.ui.Command;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
 import com.codename1.ui.Label;
-import com.codename1.ui.PickerComponent;
 import com.codename1.ui.TextComponent;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
-import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
-import com.codename1.ui.plaf.Style;
-import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.spinner.Picker;
 import com.codename1.ui.table.TableLayout;
-import com.codename1.ui.util.Resources;
 import com.codename1.ui.validation.LengthConstraint;
 import com.codename1.ui.validation.NumericConstraint;
 import com.codename1.ui.validation.Validator;
-import static com.mycompany.ListSerie.MyApplication.theme;
 import com.mycompany.pidevapp.entities.Contrat;
 import com.mycompany.pidevapp.entities.Offre;
 import com.mycompany.pidevapp.services.ServiceOffre;
@@ -37,14 +30,12 @@ import java.util.Date;
  *
  * @author brahm
  */
-public class AddOffreForm  extends BaseForm{
-   
-     public AddOffreForm() {
-        //installSidemenu(theme);
-        setLayout(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
+public class UpdateOffreForm extends BaseForm{
+    public UpdateOffreForm(Offre offre){
+         setLayout(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
         getToolbar().setTitleComponent(
                       FlowLayout.encloseCenterMiddle(
-                                new Label("Ajouter une nouvelle offre", "Title")
+                                new Label("Modifir offre", "Title")
                         )
                 );
         getToolbar().addMaterialCommandToLeftBar(
@@ -53,9 +44,12 @@ public class AddOffreForm  extends BaseForm{
                 (ev) ->new ShowOffreForm().show());
         //setTitle("Ajouter une nouvelle offre");
         TextComponent post = new TextComponent().label("Post");
+        post.text(offre.getPost());
         TextComponent objectif = new TextComponent().label("Objectif");
+        objectif.text(offre.getObjectif());
         TextComponent competence = new TextComponent().label("Competence");
-        String elements [] = {"--------------","Aéronautique Et Espace",
+        competence.text(offre.getCompetences());
+        String elements [] = {"Aéronautique Et Espace",
                     "Agriculture - Agroalimentaire",
                     "Artisanat",
                     "Audiovisuel, Cinéma",
@@ -106,17 +100,21 @@ public class AddOffreForm  extends BaseForm{
         }
         Label lbContrat = new Label("Contrat");
         ComboBox <String> cbnContrat = new ComboBox();
-        cbnContrat.addItem("--------------");
         cbnContrat.addItem("Contrat à durée indéterminée");
         cbnContrat.addItem("Contrat à durée déterminée");
         TextComponent description = new TextComponent().label("Description").multiline(true);
+        description.text(offre.getDescription());
         TextComponent salaire = new TextComponent().label("Salaire");
+        salaire.text(String.valueOf(offre.getSalaire()));
         //PickerComponent dateExpiration = PickerComponent.createDate(new Date()).label("Date");
         Picker dateExpiration = new Picker();
         TextComponent nbPlace = new TextComponent().label("Nombre Place");
+        nbPlace.text(String.valueOf(offre.getNombrePlace()));
         Label lbExpiration = new Label("Experience");
         TextComponent min = new TextComponent().label("Min");
+        min.text(String.valueOf(offre.getExperienceMin()));
         TextComponent max = new TextComponent().label("Max");
+        max.text(String.valueOf(offre.getExperienceMax()));
         Container c = new Container(new TableLayout(2, 2));
         c.add(min);
         c.add(max);
@@ -130,7 +128,7 @@ public class AddOffreForm  extends BaseForm{
         val.addConstraint(min, new NumericConstraint(true));
         val.addConstraint(max, new NumericConstraint(true));
         Button btn = new Button();
-        btn.setText("Ajouter");
+        btn.setText("Modifir");
         btn.setIcon(FontImage.createMaterial(FontImage.MATERIAL_NOTE_ADD, btn.getUnselectedStyle()));
         addAll(post,objectif,competence,lbContrat,cbnContrat,lbDomaine,cbnDomaine,description,salaire,dateExpiration,nbPlace,lbExpiration,c,btn);
         btn.addActionListener(new ActionListener() {
@@ -143,6 +141,7 @@ public class AddOffreForm  extends BaseForm{
                 {
                     try {
                         Offre o = new Offre();
+                        o.setId(offre.getId());
                         o.setPost(post.getText());
                         o.setObjectif(objectif.getText());
                         o.setCompetences(competence.getText());
@@ -162,7 +161,7 @@ public class AddOffreForm  extends BaseForm{
                         o.setContrat(contrat);
                         o.setDateDepot(new Date());
                         System.out.println(o.toString());
-                        if( ServiceOffre.getInstance().addOffre(o))
+                        if( ServiceOffre.getInstance().updateOffre(o))
                         { Dialog.show("Success","Connection accepted",new Command("OK"));
                           post.text("");
                           objectif.text("");
@@ -184,13 +183,6 @@ public class AddOffreForm  extends BaseForm{
                 //System.out.println(so.getAllOffres().toString());
             }
         });
-        
     }
-
-//    @Override
-//    protected boolean isCurrentInbox() {
-//        return true;
-//    }
-
-
+    
 }

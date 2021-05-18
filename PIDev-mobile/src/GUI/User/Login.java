@@ -48,9 +48,9 @@ public class Login  extends Form {
         current = this;
         setTitle("Se connecter");
         setLayout(BoxLayout.y());
-        addSideMenu(theme);
-        getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_PUBLIC, e -> {
-        });
+        //addSideMenu(theme);
+//        getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_PUBLIC, e -> {
+//        });
         Style loginStyle = getAllStyles();
         Container cnt1 = new Container(new FlowLayout(Container.CENTER));
         Container cnt4 = new Container(new FlowLayout(Container.CENTER));
@@ -62,10 +62,11 @@ public class Login  extends Form {
         Logo = new ImageViewer(Image.createImage("/recruitini-logo.png"));
         } catch (IOException ex) {
         }
-        ImageViewer Logo1 = null;
-        try { Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
-        } catch (IOException ex) {
-        }  loginStyle.setBgImage(Logo1.getImage());
+        /** backgroun remove**/
+//        ImageViewer Logo1 = null;
+//        try { Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
+//        } catch (IOException ex) {
+//        }  loginStyle.setBgImage(Logo1.getImage());
 
         /**
          * ***********************************************************************************************
@@ -126,11 +127,13 @@ public class Login  extends Form {
         /**
          * ***********************************************************************************************
          */
+
         Button motOublier = new Button("Mot de passe oublié ?");
+        motOublier.setUIID("CenterLabel");
         Style butStyle1 = motOublier.getAllStyles();
 
-        butStyle1.setFgColor(0xffffff);
-        butStyle1.setBgTransparency(0);
+//        butStyle1.setFgColor(0xffffff);
+//        butStyle1.setBgTransparency(0);
         butStyle1.setMarginUnit(Style.UNIT_TYPE_DIPS);
         butStyle1.setMargin(Component.TOP, 10);
         cnt5.add(motOublier);
@@ -138,9 +141,10 @@ public class Login  extends Form {
          * ***********************************************************************************************
          */
         Button inscrire = new Button("s'inscrire");
+        inscrire.setUIID("CenterLabel");
         Style butStyle2 = inscrire.getAllStyles();
-        butStyle2.setFgColor(0xffffff);
-        butStyle2.setBgTransparency(0);
+//        butStyle2.setFgColor(0xffffff);
+//        butStyle2.setBgTransparency(0);
         butStyle2.setMarginUnit(Style.UNIT_TYPE_DIPS);
         butStyle2.setMargin(Component.TOP, 0);
         /**

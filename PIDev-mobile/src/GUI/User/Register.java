@@ -33,7 +33,6 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.RoundRectBorder;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.UIBuilder;
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Properties;
@@ -62,7 +61,7 @@ public class Register extends Form {
     public static String kkactivation ;
     public static String jjactive ;
     private FileChooser fileChooser ;
-    private File file ;
+   // private File file ;
     private Stage stage ;
     private Image image ;
     private String imgp;
@@ -74,12 +73,12 @@ public class Register extends Form {
         setTitle("S'inscrire");
         setLayout(BoxLayout.y());
         Style loginStyle = getAllStyles();
-        ImageViewer Logo1 = null;
-        try {
-            Logo1 = new ImageViewer(com.codename1.ui.Image.createImage("/back.jpg"));
-        } catch (IOException ex) {
-        }
-        loginStyle.setBgImage(Logo1.getImage());
+//        ImageViewer Logo1 = null;
+//        try {
+//            Logo1 = new ImageViewer(com.codename1.ui.Image.createImage("/back.jpg"));
+//        } catch (IOException ex) {
+//        }
+//        loginStyle.setBgImage(Logo1.getImage());
         
         Container c0 = new Container(BoxLayout.x());
         Label lbemail = new Label("Adress Email : ");
@@ -203,12 +202,12 @@ public class Register extends Form {
         Style userStyle8 = lab1.getAllStyles();
         userStyle8.setBorder(RoundRectBorder.create().
         strokeOpacity(120) );
-        userStyle8.setFgColor(0xffffff);
+//        userStyle8.setFgColor(0xffffff);
          
         Style userStyle9 = lab2.getAllStyles();
         userStyle9.setBorder(RoundRectBorder.create().
         strokeOpacity(120) );
-        userStyle9.setFgColor(0xffffff);
+//        userStyle9.setFgColor(0xffffff);
        
         Container cnt1 = new Container(new FlowLayout(CENTER, CENTER));
         Container c_f = new Container(BoxLayout.y());

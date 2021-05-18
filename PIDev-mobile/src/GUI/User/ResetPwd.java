@@ -76,12 +76,12 @@ public class ResetPwd  extends Form  {
             Logo = new ImageViewer(Image.createImage("/recruitini-logo.png"));
         } catch (IOException ex) {
         }
-        ImageViewer Logo1 = null;
-        try {
-            Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
-        } catch (IOException ex) {
-        }
-        loginStyle.setBgImage(Logo1.getImage());
+//        ImageViewer Logo1 = null;
+//        try {
+//            Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
+//        } catch (IOException ex) {
+//        }
+//        loginStyle.setBgImage(Logo1.getImage());
 
         /**
          * ***********************************************************************************************
@@ -172,23 +172,34 @@ public class ResetPwd  extends Form  {
         /**
          * ***********************************************************************************************
          */
+        /*
+        
+        */
+        Container cntInscrire = new Container(new FlowLayout(Container.CENTER));
+        Container cntLogin  = new Container(new FlowLayout(Container.CENTER));
         Button inscrire = new Button("s'inscrire");
+        inscrire.setUIID("CenterLabel");
         Style butStyle2 = inscrire.getAllStyles();
-        butStyle2.setFgColor(0xffffff);
-        butStyle2.setBgTransparency(0);
+//        butStyle2.setFgColor(0xffffff);
+//        butStyle2.setBgTransparency(0);
         butStyle2.setMarginUnit(Style.UNIT_TYPE_DIPS);
         butStyle2.setMargin(Component.TOP, 0);
      
          Button login = new Button("Login");
+         login.setUIID("CenterLabel");
         Style butStyle3 = login.getAllStyles();
-        butStyle3.setFgColor(0xffffff);
-        butStyle3.setBgTransparency(0);
+//        butStyle3.setFgColor(0xffffff);
+//        butStyle3.setBgTransparency(0);
         butStyle3.setMarginUnit(Style.UNIT_TYPE_DIPS);
         butStyle3.setMargin(Component.TOP, 0);
+        /**/
+        cntInscrire.add(inscrire);
+        cntLogin.add(login);
+        /**/
         /**
          * ***********************************************************************************************
          */
-        addAll(cnt1, cnt2, btnval,cnt3, cnt5, btnvalcode,login, inscrire);
+        addAll(cnt1, cnt2, btnval,cnt3, cnt5, btnvalcode,cntLogin, cntInscrire);
         /**
          * ***********************************************************************************************
          */

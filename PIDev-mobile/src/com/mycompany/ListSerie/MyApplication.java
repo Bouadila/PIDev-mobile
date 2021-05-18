@@ -1,7 +1,11 @@
 package com.mycompany.ListSerie;
 
 
-
+import GUI.User.ActiveUser;
+import GUI.User.Login;
+import GUI.User.NouvForm;
+import GUI.User.ResetPwd;
+import GUI.User.ResetPwdCode;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Form;
 import com.codename1.ui.Dialog;
@@ -44,15 +48,21 @@ public class MyApplication {
     }
     
     public void start() {
+
         if(current != null){
             current.show();
             return;
         }
+//
+//        ShowOffreForm fo = new ShowOffreForm();
+//        fo.show();
+//        //InboxForm f = new InboxForm ();
+//        //f.show();
+//=======
+//        new ResetPwdCode().show();
+        
+            new Login().show();
 
-        ShowOffreForm fo = new ShowOffreForm();
-        fo.show();
-        //InboxForm f = new InboxForm ();
-        //f.show();
     }
 
     public void stop() {

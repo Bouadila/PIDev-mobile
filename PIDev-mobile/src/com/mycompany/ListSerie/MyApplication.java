@@ -53,12 +53,10 @@ public class MyApplication {
             current.show();
             return;
         }
-//
+
 //        ShowOffreForm fo = new ShowOffreForm();
 //        fo.show();
-//        //InboxForm f = new InboxForm ();
-//        //f.show();
-//=======
+
 //        new ResetPwdCode().show();
         
             new Login().show();

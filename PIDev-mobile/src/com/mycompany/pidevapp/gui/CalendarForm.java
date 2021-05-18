@@ -135,10 +135,11 @@ public class CalendarForm extends BaseForm {
 } catch(IOException err) {
     Log.e(err);
 }
-        
-        add(createEntry(resourceObjectInstance, false, "10:15", "11:45", "3B, 2nd Floor", "Design Review", "Bryant Ford, Ami Koehler", "contact-a.png", "contact-b.png", "contact-c.png"));
-        add(createEntry(resourceObjectInstance, true, "12:20", "13:20", "Taco Bell", "Lunch", "Detra Mcmunn, Ami Koehler", "contact-b.png", "contact-c.png"));
-        add(createEntry(resourceObjectInstance, false, "16:15", "17:10", "3B, 2nd Floor", "Design Meeting", "Bryant Ford, Ami Koehler, Detra Mcmunn", "contact-a.png"));
+//        
+//        add(createEntry(resourceObjectInstance, false, "10:15", "11:45", "3B, 2nd Floor", "Design Review", "Bryant Ford, Ami Koehler", "contact-a.png", "contact-b.png", "contact-c.png"));
+//        add(createEntry(resourceObjectInstance, true, "12:20", "13:20", "Taco Bell", "Lunch", "Detra Mcmunn, Ami Koehler", "contact-b.png", "contact-c.png"));
+//        add(createEntry(resourceObjectInstance, false, "16:15", "17:10", "3B, 2nd Floor", "Design Meeting", "Bryant Ford, Ami Koehler, Detra Mcmunn", "contact-a.png"));
+//    
     }
 
     private Container createEntry(Resources res, boolean selected, String startTime, String endTime, String location, String title, String attendance, String... images) {

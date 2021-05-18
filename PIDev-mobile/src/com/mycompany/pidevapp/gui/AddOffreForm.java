@@ -130,7 +130,7 @@ public class AddOffreForm  extends BaseForm{
         val.addConstraint(min, new NumericConstraint(true));
         val.addConstraint(max, new NumericConstraint(true));
         Button btn = new Button();
-        btn.setText("save");
+        btn.setText("Ajouter");
         btn.setIcon(FontImage.createMaterial(FontImage.MATERIAL_NOTE_ADD, btn.getUnselectedStyle()));
         addAll(post,objectif,competence,lbContrat,cbnContrat,lbDomaine,cbnDomaine,description,salaire,dateExpiration,nbPlace,lbExpiration,c,btn);
         btn.addActionListener(new ActionListener() {

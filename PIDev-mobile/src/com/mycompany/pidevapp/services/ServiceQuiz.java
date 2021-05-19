@@ -186,5 +186,21 @@ public class ServiceQuiz {
         return resultOK;
         
     }
+    
+    public boolean update(int nb){
+        String url = Statics.BASE_URL + "api/update/quiz?nb="+nb;
+        req.setUrl(url);// Insertion de l'URL de notre demande de connexion
+        req.setPost(true);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        System.out.println(resultOK);
+        return resultOK;
+    }
 
 }

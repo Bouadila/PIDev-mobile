@@ -36,12 +36,15 @@ public class TakeQuiz extends BaseForm {
     Container cnt = new Container(BoxLayout.y());
     TextField tf = new TextField();
     ServiceQuiz sq = new ServiceQuiz();
+    Label error = new Label();
     Quiz z;
     int score;
     HashMap<Integer, Integer> res;
     ButtonGroup btnGroup = new ButtonGroup();
 
     ArrayList<Integer> ids = new ArrayList();
+            Button btn = new Button("Suivant");
+
 
     public TakeQuiz() {
         score = 0;
@@ -53,7 +56,10 @@ public class TakeQuiz extends BaseForm {
 
         tf.setText("0");
         tf.setVisible(false);
+        error.setText("Vous devez selectioner une reponse");
+        error.setVisible(false);
         fill();
+        error.getAllStyles().setFgColor(16711680);
 
         setLayout(new BorderLayout());
         ((BorderLayout) getLayout()).setCenterBehavior(BorderLayout.CENTER_BEHAVIOR_CENTER);
@@ -67,9 +73,14 @@ public class TakeQuiz extends BaseForm {
         Label lb = createForFont(largeBoldMonospaceFont, z.getNom_quiz());
         
         Container centered = BorderLayout.centerAbsolute(lb);
-        Button btn = new Button("Suivant");
+        
 
         btn.addActionListener(event -> {
+            if(btnGroup.getSelectedIndex()== -1){
+                error.setVisible(true);
+                revalidate();
+            }else{
+                error.setVisible(false);
             int nb = Integer.parseInt(tf.getText());
             Question question = z.getQuestions().get(nb);
             res.put(question.getId(), ids.get(btnGroup.getSelectedIndex()));
@@ -82,6 +93,7 @@ public class TakeQuiz extends BaseForm {
             tf.setText(String.valueOf(nb + 1));
             fill();
             revalidate();
+            }
         });
 
         add(BorderLayout.CENTER, cnt);
@@ -95,18 +107,26 @@ public class TakeQuiz extends BaseForm {
         Font largeBoldSystemFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
         int nb = Integer.parseInt(tf.getText());
         cnt.removeAll();
+        if (nb+1 == z.getQuestions().size()) {
+            btn.setText("Terminer");
+        }
         if (nb < z.getQuestions().size()) {
-
+            btnGroup= new ButtonGroup();
             Question question = z.getQuestions().get(nb);
             ArrayList<Reponse> reponses = question.getReponses();
             Label l = createForFont(largeBoldSystemFont, question.getContenu_ques());
-            l.getAllStyles().setPaddingBottom(10);
+            
+            
+            
             cnt.add(l);
+            cnt.add(error);
+            error.getAllStyles().setPaddingBottom(10);
             for (int i = 0; i < reponses.size(); i++) {
                 ids.add(reponses.get(i).getId());
                 RadioButton rd = new RadioButton(reponses.get(i).getContenu_rep());
                 Border border = Border.createCompoundBorder(Border.createLineBorder(1, 4048823), Border.createLineBorder(1, 4048823), Border.createLineBorder(1, 4048823), Border.createLineBorder(1, 4048823));
                 rd.setPreferredH(150);
+                rd.setPreferredW(800);
                 rd.getAllStyles().setBorder(RoundBorder.create().rectangle(true).color(4048823));
 
                 btnGroup.add(rd);
@@ -114,12 +134,15 @@ public class TakeQuiz extends BaseForm {
                 cnt.add(rd);
             }
             btnGroup.addActionListener(event -> {
-                    for(int i = 0; i < reponses.size() ; i++)
+                error.setVisible(false);
+                    for(int i = 0; i < reponses.size() ; i++){
                         if(btnGroup.getRadioButton(i).isSelected())
                             btnGroup.getRadioButton(i).getAllStyles().setBorder(RoundBorder.create().rectangle(true).color(16735487));
                     else
                         btnGroup.getRadioButton(i).getAllStyles().setBorder(RoundBorder.create().rectangle(true).color(4048823));
-                });
+                    }
+                    revalidate();
+            });
 
         } else {
             score = score * 100 / z.getQuestions().size();

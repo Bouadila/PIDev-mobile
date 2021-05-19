@@ -87,7 +87,7 @@ public class MyApplication {
 //            f.setEditOnShow(title.getField());
 //
 //            f.show();
-        QuizAddForm fo = new QuizAddForm();
+        TakeQuiz fo = new TakeQuiz();
         fo.show();
 
     }

@@ -52,7 +52,8 @@ public class QuizAddForm extends BaseForm {
 
         TextComponent titre = new TextComponent().label("Titre");
         Validator val = new Validator();
-        val.addConstraint(titre, new LengthConstraint(4));
+//        val.addConstraint(titre, new LengthConstraint(4));
+
         con.add(titre);
         TextField tf = new TextField();
         TextField tf1 = new TextField();
@@ -61,6 +62,7 @@ public class QuizAddForm extends BaseForm {
         tf.setText("2");
         tf1.setText("0");
         Button btn = new Button();
+
         Button btnFinish = new Button("Terminer");
         btn.setText("Suivant");
         int x = 0;
@@ -70,10 +72,10 @@ public class QuizAddForm extends BaseForm {
         Container ct = new Container(new TableLayout(4, 3));
         Container c = new Container(tl);
 
-        TextComponent q1 = new TextComponent().label("Question 1");
-        TextComponent q2 = new TextComponent().label("Question 2");
-        TextComponent q3 = new TextComponent().label("Question 3");
-        TextComponent q4 = new TextComponent().label("Question 4");
+        TextComponent q1 = new TextComponent().label("Reponse 1");
+        TextComponent q2 = new TextComponent().label("Reponse 2");
+        TextComponent q3 = new TextComponent().label("Reponse 3");
+        TextComponent q4 = new TextComponent().label("Reponse 4");
         RadioButton r1 = new RadioButton();
         RadioButton r2 = new RadioButton();
         RadioButton r3 = new RadioButton();
@@ -101,42 +103,85 @@ public class QuizAddForm extends BaseForm {
         btn21.setBorder(RoundBorder.create().color(16755083));
         FontImage.setMaterialIcon(btn2, FontImage.MATERIAL_CLOSE);
         btnFinish.addActionListener(e -> {
+            int nombre = Integer.parseInt(tf.getText());
+            boolean check = true;
+            if (text.getText().length() < 4) {
+                text.errorMessage("Le continuu de question doit etre 4 caractere min");
+                revalidate();
+                check = false;
+            } else if (btnGroupe.getSelectedIndex() == -1) {
+                text.errorMessage("Vous devez selectioner la reponse juste");
+                check = false;
+            } else {
+                text.errorMessage("");
+            }
+            if (q1.getText().length() < 1) {
+                q1.errorMessage("vous devez saisir une reponse");
+                revalidate();
+                check = false;
+            } else {
+                q1.errorMessage("");
+            }
+            if (q2.getText().length() < 1) {
+                q2.errorMessage("vous devez saisir une reponse");
+                revalidate();
+                check = false;
+            } else {
+                q2.errorMessage("");
+            }
+            if (nombre > 2 && q3.getText().length() < 1) {
+                q3.errorMessage("vous devez saisir une reponse");
+                revalidate();
+                check = false;
+            } else {
+                q3.errorMessage("");
+            }
+            if (nombre > 3 && q4.getText().length() < 1) {
+                q4.errorMessage("vous devez saisir une reponse");
+                revalidate();
+                check = false;
+            } else {
+                q4.errorMessage("");
+            }
+            if (check) {
+                Question ques = new Question();
+                ques.setContenu_ques(text.getText());
+                text.text("");
+                ArrayList<String> list = new ArrayList();
+                list.add(q1.getText());
+                q1.text("");
+                list.add(q2.getText());
+                q2.text("");
+                if (nombre > 2) {
+                    list.add(q3.getText());
+                    q3.text("");
+                }
+                if (nombre > 3) {
+                    list.add(q4.getText());
+                    q4.text("");
 
-            Question ques = new Question();
-            ques.setContenu_ques(text.getText());
-            text.text("");
-            ArrayList<String> list = new ArrayList();
-            list.add(q1.getText());
-            q1.text("");
-            list.add(q2.getText());
-            q2.text("");
-            if (nbr > 2) {
-                list.add(q3.getText());
-                q3.text("");
-            }
-            if (nbr > 3) {
-                list.add(q4.getText());
-                q4.text("");
+                }
+                int vrai = 1;
+                r1.setSelected(false);
+                if (r2.isSelected()) {
+                    vrai = 2;
+                    r2.setSelected(false);
+                }
+                if (r3.isSelected()) {
+                    vrai = 3;
+                    r3.setSelected(false);
+                }
+                if (r4.isSelected()) {
+                    vrai = 4;
+                    r4.setSelected(false);
+                }
 
+                sq.addQuestion(ques, list, vrai);
+                int test = Integer.parseInt(tf1.getText());
+                sq.update(test);
+                AboutUs a = new AboutUs();
+                a.showBack();
             }
-            int vrai = 1;
-            r1.setSelected(false);
-            if (r2.isSelected()) {
-                vrai = 2;
-                r2.setSelected(false);
-            }
-            if (r3.isSelected()) {
-                vrai = 3;
-                r3.setSelected(false);
-            }
-            if (r4.isSelected()) {
-                vrai = 4;
-                r4.setSelected(false);
-            }
-            q3.text("");
-            q4.text("");
-
-            sq.addQuestion(ques, list, vrai);
             ////okhrejjjjj
         });
 
@@ -145,12 +190,14 @@ public class QuizAddForm extends BaseForm {
             if (nombre == 3) {
                 q3.setVisible(false);
                 r3.setVisible(false);
+                r3.setSelected(false);
                 btn1.setVisible(false);
                 q3.text("");
             }
             if (nombre == 4) {
                 q4.setVisible(false);
                 r4.setVisible(false);
+                r4.setSelected(false);
                 btn2.setVisible(false);
                 q4.text("");
 
@@ -166,11 +213,13 @@ public class QuizAddForm extends BaseForm {
                 q3.setVisible(false);
                 r3.setVisible(false);
                 btn1.setVisible(false);
+                r3.setSelected(false);
                 q3.text("");
             }
             if (nombre == 4) {
                 q4.setVisible(false);
                 r4.setVisible(false);
+                r4.setSelected(false);
                 btn2.setVisible(false);
                 q4.text("");
 
@@ -185,6 +234,7 @@ public class QuizAddForm extends BaseForm {
         plus.addActionListener(e -> {
             int nombre = Integer.parseInt(tf.getText());
             if (nombre > 4) {
+                val.isValid();
 
             } else {
                 tf.setText(String.valueOf(nombre + 1));
@@ -225,66 +275,118 @@ public class QuizAddForm extends BaseForm {
         btn2.setVisible(false);
 
         System.out.println(btnCon.getComponentCount());
+        titre.setFocusable(true);
+        btn.setPreferredW(1100);
         btn.addActionListener(event -> {
 
             int test = Integer.parseInt(tf1.getText());
             if (test == 0) {
-                Quiz q = new Quiz();
-                q.setNom_quiz(titre.getText());
-                System.out.println(sq.addQuiz(q));
-                con.removeComponent(titre);
-                ct1.addAll(text, plus);
-                con.add(ct1);
-                con.add(ct);
-                btnCon.add(btnFinish);
-                revalidate();
-                tf1.setText(String.valueOf(test + 1));
+
+                if (titre.getText().length() < 4) {
+                    titre.errorMessage("Le titre de quiz doit etre 4 caractere min");
+                    revalidate();
+                } else {
+                    Quiz q = new Quiz();
+                    q.setNom_quiz(titre.getText());
+                    System.out.println(sq.addQuiz(q));
+                    con.removeComponent(titre);
+                    ct1.addAll(text, plus);
+                    con.add(ct1);
+                    con.add(ct);
+                    btnCon.add(btnFinish);
+                    btn.setPreferredW(500);
+                    btnFinish.setPreferredW(500);
+
+                    revalidate();
+                    tf1.setText(String.valueOf(test + 1));
+                }
 
             } else {
                 int nombre = Integer.parseInt(tf.getText());
-                Question ques = new Question();
-                ques.setContenu_ques(text.getText());
-                text.text("");
-                ArrayList<String> list = new ArrayList();
-                list.add(q1.getText());
-                q1.text("");
-                list.add(q2.getText());
-                q2.text("");
-                if (nombre > 2) {
-                    list.add(q3.getText());
+                boolean check = true;
+                if (text.getText().length() < 4) {
+                    text.errorMessage("Le continuu de question doit etre 4 caractere min");
+                    revalidate();
+                    check = false;
+                } else if (btnGroupe.getSelectedIndex() == -1) {
+                    text.errorMessage("Vous devez selectioner la reponse juste");
+                    check = false;
+                } else {
+                    text.errorMessage("");
+                }
+                if (q1.getText().length() < 1) {
+                    q1.errorMessage("vous devez saisir une reponse");
+                    revalidate();
+                    check = false;
+                } else {
+                    q1.errorMessage("");
+                }
+                if (q2.getText().length() < 1) {
+                    q2.errorMessage("vous devez saisir une reponse");
+                    revalidate();
+                    check = false;
+                } else {
+                    q2.errorMessage("");
+                }
+                if (nombre > 2 && q3.getText().length() < 1) {
+                    q3.errorMessage("vous devez saisir une reponse");
+                    revalidate();
+                    check = false;
+                } else {
+                    q3.errorMessage("");
+                }
+                if (nombre > 3 && q4.getText().length() < 1) {
+                    q4.errorMessage("vous devez saisir une reponse");
+                    revalidate();
+                    check = false;
+                } else {
+                    q4.errorMessage("");
+                }
+                if (check) {
+                    Question ques = new Question();
+                    ques.setContenu_ques(text.getText());
+                    text.text("");
+                    ArrayList<String> list = new ArrayList();
+                    list.add(q1.getText());
+                    q1.text("");
+                    list.add(q2.getText());
+                    q2.text("");
+                    if (nombre > 2) {
+                        list.add(q3.getText());
+                        q3.text("");
+                    }
+                    if (nombre > 3) {
+                        list.add(q4.getText());
+                        q4.text("");
+
+                    }
+                    int vrai = 1;
+                    r1.setSelected(false);
+                    if (r2.isSelected()) {
+                        vrai = 2;
+                        r2.setSelected(false);
+                    }
+                    if (r3.isSelected()) {
+                        vrai = 3;
+                        r3.setSelected(false);
+                    }
+                    if (r4.isSelected()) {
+                        vrai = 4;
+                        r4.setSelected(false);
+                    }
                     q3.text("");
-                }
-                if (nombre > 3) {
-                    list.add(q4.getText());
                     q4.text("");
-
+                    q3.setVisible(false);
+                    r3.setVisible(false);
+                    btn1.setVisible(false);
+                    q4.setVisible(false);
+                    r4.setVisible(false);
+                    btn2.setVisible(false);
+                    tf1.setText(String.valueOf(test + 1));
+                    sq.addQuestion(ques, list, vrai);
+                    tf.setText(String.valueOf(2));
+                    revalidate();
                 }
-                int vrai = 1;
-                r1.setSelected(false);
-                if (r2.isSelected()) {
-                    vrai = 2;
-                    r2.setSelected(false);
-                }
-                if (r3.isSelected()) {
-                    vrai = 3;
-                    r3.setSelected(false);
-                }
-                if (r4.isSelected()) {
-                    vrai = 4;
-                    r4.setSelected(false);
-                }
-                q3.text("");
-                q4.text("");
-                q3.setVisible(false);
-                r3.setVisible(false);
-                btn1.setVisible(false);
-                q4.setVisible(false);
-                r4.setVisible(false);
-                btn2.setVisible(false);
-
-                sq.addQuestion(ques, list, vrai);
-                tf.setText(String.valueOf(2));
-
             }
 
 //                c.addAll(text, plus, new RadioButton(),new TextComponent().label("reponse"), new RadioButton(), new TextComponent().label("reponse"));

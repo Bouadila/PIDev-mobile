@@ -9,11 +9,8 @@ import Entities.Candidature;
 import com.codename1.components.InfiniteProgress;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.io.Log;
-import com.codename1.l10n.SimpleDateFormat;
-import com.codename1.ui.BrowserComponent;
 import com.codename1.ui.Button;
 import com.codename1.ui.CN;
-import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import static com.codename1.ui.Component.CENTER;
 import static com.codename1.ui.Component.RIGHT;
@@ -25,22 +22,20 @@ import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionEvent;
-import com.codename1.ui.events.DataChangedListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
-import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.ImageIO;
 import com.codename1.ui.util.Resources;
 import java.util.Date;
 import services.ServiceCandidature;
-import static com.mycompany.ListSerie.MyApplication.theme;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import GUI.Candidature.AfficherCandidatureCand;
+
 import com.codename1.ext.filechooser.FileChooser;
+import com.codename1.ui.CheckBox;
 /**
  *
  * @author A.L.I.C.E
@@ -71,7 +66,7 @@ public class AjouterCandidature extends BaseForm {
                 (ev) -> AfficherCandidatureCand.show());
         
         
-        
+        CheckBox multiSelect = new CheckBox("Multi-select");
         img1.addActionListener((ActionEvent e) -> {
             
             if (FileChooser.isAvailable()) {
@@ -82,7 +77,7 @@ public class AjouterCandidature extends BaseForm {
                         revalidate();
                         return;
                     }
-                    else  {
+                    if (multiSelect.isSelected()) {
                         String[] paths = (String[]) e2.getSource();
                         for (String path : paths) {
                             System.out.println(path);

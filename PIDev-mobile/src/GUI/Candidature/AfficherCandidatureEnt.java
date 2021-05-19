@@ -7,6 +7,8 @@ package GUI.Candidature;
 
 import Entities.Candidature;
 import com.codename1.components.ScaleImageLabel;
+import com.codename1.io.FileSystemStorage;
+import com.codename1.io.Util;
 import com.codename1.ui.BrowserComponent;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
@@ -69,7 +71,7 @@ public class AfficherCandidatureEnt extends BaseForm {
 
         
         
-        
+        Form hi = new Form("PDF Viewer", BoxLayout.y());
         Form AjouterCandidature = null;
 
         //this.getAllStyles().setBgImage(theme.getImage("backgroundForm.jpg"));
@@ -128,6 +130,7 @@ public class AfficherCandidatureEnt extends BaseForm {
 
             Button delete = new Button("delete");
             Button update = new Button("update");
+            Button voircv = new Button("voir cv");
             
             
             Label space2= new Label(" ");
@@ -156,7 +159,12 @@ public class AfficherCandidatureEnt extends BaseForm {
             date.setUIID("NewsTopLine");
             date.setEditable(false);
 
-            
+            String fileName = list.get(i).getCv();
+            voircv.addActionListener(e -> {
+                FileSystemStorage fs = FileSystemStorage.getInstance();
+                
+                Display.getInstance().execute(fileName);
+            });
 
             
             int x = list.get(i).getId();
@@ -192,7 +200,7 @@ public class AfficherCandidatureEnt extends BaseForm {
                     //f.setNum((int)Float.parseFloat(num.getText()));
                     f.setStatus(status.getText());
                     f.setDiplome(diplome.getText());
-                    f.setCv(cv.getText());
+                    //f.setCv(cv.getText());
                     //f.setDate_candidature(date.getText());
 
                     f.setId(x);
@@ -204,7 +212,7 @@ public class AfficherCandidatureEnt extends BaseForm {
             
             cnt.add(BorderLayout.WEST, BoxLayout.encloseY(
                     //num,
-                    status,diplome,cv,date,BoxLayout.encloseX(update,delete)));
+                    status,diplome,cv,voircv,date,BoxLayout.encloseX(update,delete)));
 
 
        

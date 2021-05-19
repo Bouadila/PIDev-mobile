@@ -164,8 +164,11 @@ public class ResetPwdCode extends Form {
                 if ((tpassword0.getText().length() == 0) || (tpassword.getText().length() == 0)) {
                     Dialog.show("Alert", "vous devez Remplir tt les champs", new Command("OK"));
                 } else {System.out.println("error related to sql : (" +tpassword.getText());
+                 System.out.println("error related to sql : (" +emailee);
                         if(tpassword0.getText().equals(tpassword.getText()))
-                        {    User u = UserService.getInstance().passwordreset("admin@gmail.com", tpassword.getText());
+                        {   System.out.println("error related to sql : (" +emailee);
+
+                            User u = UserService.getInstance().passwordreset(emailee, tpassword.getText());
                               Dialog.show("Succés", "le mot de passe est changé", new Command("OK"));
                                             new Login().show();
 

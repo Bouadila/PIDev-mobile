@@ -79,7 +79,7 @@ private String mp = " " ;
                 u.setPrenom(UserListJson.get("prenom").toString());
                 
                 u.setName(UserListJson.get("name").toString());               
-                u.setImg(UserListJson.get("img").toString());
+//                u.setImg(UserListJson.get("img").toString());
                 u.setGover(UserListJson.get("gover").toString());
                 u.setSpecial(UserListJson.get("special").toString());              
                 u.setRoles(UserListJson.get("roles").toString());
@@ -110,7 +110,7 @@ private String mp = " " ;
                 u.setEmail(obj.get("email").toString());
                 u.setPrenom(obj.get("prenom").toString());
                 u.setSpecial(obj.get("special").toString());
-                u.setImg(obj.get("img").toString());
+//                u.setImg(obj.get("img").toString());
                 u.setActivation_token(obj.get("activation_token").toString());
                 u.setRoles(obj.get("roles").toString());
              
@@ -165,10 +165,10 @@ public User SignIn(String email , String password) {
              {
 double id = (double) UserListJson.get("id");
                                   u.setId((int) id);
-               ArrayList<String> roles = (ArrayList<String>) UserListJson.get("roles");
-            // we need the first one
-            String role = roles.get(0) ;
-                       u.setRoles(role);
+//               ArrayList<String> roles = (ArrayList<String>) UserListJson.get("roles");
+//            // we need the first one
+//            String role = roles.get(0) ;
+//                       u.setRoles(role);
             }         
         } catch (IOException ex) {  }
         return u;           
@@ -184,10 +184,10 @@ double id = (double) UserListJson.get("id");
              {
 double id = (double) UserListJson.get("id");
                                   user.setId((int) id);
-               ArrayList<String> roles = (ArrayList<String>) UserListJson.get("roles");
-            // we need the first one
-            String role = roles.get(0) ;
-                       user.setRoles(role);
+//               ArrayList<String> roles = (ArrayList<String>) UserListJson.get("roles");
+//            // we need the first one
+//            String role = roles.get(0) ;
+//                       user.setRoles(role);
                 users.add(u);            
             }         
         } catch (IOException ex) {  }
@@ -218,7 +218,7 @@ double id = (double) UserListJson.get("id");
     }
 
 public boolean SignUp(User user) {
-            String url = "http://127.0.0.1:8000/newFsmb?&email="+user.getEmail()+"&name="+user.getName()+"&prenom="+user.getPrenom()+"&prenom="+user.getPrenom()+"&password="+user.getPassword()+"&special="+user.getSpecial()+"&gover="+user.getGover()+"&img="+user.getImg()+"&etat="+user.getEtat()+"&roles="+user.getRoles();                       
+            String url = "http://127.0.0.1:8000/newFsmb?&email="+user.getEmail()+"&name="+user.getName()+"&prenom="+user.getPrenom()+"&prenom="+user.getPrenom()+"&password="+user.getPassword()+"&special="+user.getSpecial()+"&gover="+user.getGover()+"&etat="+user.getEtat()+"&roles="+user.getRoles();                       
         req.setUrl(url);// Insertion de l'URL de notre demande de connexion
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
@@ -366,8 +366,8 @@ public String activeetat(String email) {
  }
  
 
-    public User editUser(int idaffiche, String email, String name, String pasword,String prenom, String Special, String Gover, String Img) {
-     String url = "http://127.0.0.1:8000/user_ediUser?&id="+idaffiche+"&email="+email+"&name="+name+"&password="+pasword+"&prenom="+prenom+"&special="+Special+"&gover="+Gover+"&img="+Img;                               
+    public User editUser(int idaffiche, String email, String name, String pasword,String prenom, String Special, String Gover) {
+     String url = "http://127.0.0.1:8000/user_ediUser?&id="+idaffiche+"&email="+email+"&name="+name+"&password="+pasword+"&prenom="+prenom+"&special="+Special+"&gover="+Gover;                               
      req.setUrl(url);// Insertion de l'URL de notre demande de connexion
               
 

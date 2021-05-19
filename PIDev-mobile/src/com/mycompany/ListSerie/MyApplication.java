@@ -1,5 +1,6 @@
 package com.mycompany.ListSerie;
 
+import GUI.Formation.AjouterFormation;
 import GUI.User.ActiveUser;
 import GUI.User.Login;
 import GUI.User.NouvForm;
@@ -64,6 +65,7 @@ public class MyApplication {
 //        new ActiveUser().show();
         
             new Login().show();
+//        new AjouterFormation(theme).show();
 
     }
 

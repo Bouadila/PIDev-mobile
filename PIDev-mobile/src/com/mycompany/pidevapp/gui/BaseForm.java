@@ -19,6 +19,7 @@
 package com.mycompany.pidevapp.gui;
 
 import Entities.User;
+import GUI.Formation.AfficherFormation;
 import static GUI.User.Login.idaffiche;
 import GUI.User.compte;
 import GUI.User.profil;
@@ -58,9 +59,9 @@ public class BaseForm extends Form {
             calendarImage = selection;
         }
 
-        Image statsImage = null;
-        if (isCurrentStats()) {
-            statsImage = selection;
+        Image FormationImage = null;
+        if (isCurrentFormation()) {
+            FormationImage = selection;
         }
 
         Image offreImage = null;
@@ -86,7 +87,8 @@ public class BaseForm extends Form {
             new ShowCandidatOffreForm().show();
         });
        }
-        getToolbar().addCommandToSideMenu("Formation", statsImage, e -> {
+        getToolbar().addCommandToSideMenu("Formation", FormationImage, e -> {
+            new AfficherFormation(res).show();
         });
         getToolbar().addCommandToSideMenu("Noter Rendez Vous", calendarImage, e -> new CalendarForm(res).show());
         getToolbar().addCommandToSideMenu("Contact", null, e -> {
@@ -118,7 +120,7 @@ public class BaseForm extends Form {
         return false;
     }
 
-    protected boolean isCurrentStats() {
+    protected boolean isCurrentFormation() {
         return false;
     }
 

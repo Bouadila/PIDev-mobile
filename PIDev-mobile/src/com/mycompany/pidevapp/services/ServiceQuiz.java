@@ -90,6 +90,31 @@ public class ServiceQuiz {
         return resultOK;
 
     }
+    
+    public int getOffreQuizId(int offreId){
+        String url = Statics.BASE_URL + "api/offreQuiz/" + offreId;
+        req.setUrl(url);
+        Quiz q = new  Quiz();
+        req.setPost(false);
+        
+        req.addResponseListener((evt) -> {
+            try{
+                JSONParser jsonp = new JSONParser();
+                String str = new String(req.getResponseData());
+                JSONObject myjson = new JSONObject(str);
+                q.setId((int) Float.parseFloat(myjson.get("id").toString()));
+            }
+            catch(Exception ex){
+                
+            }
+            
+            
+        });
+        
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        
+        return q.getId();
+    }
 
     public Quiz takeQuiz(int id) {
 
@@ -185,6 +210,21 @@ public class ServiceQuiz {
         System.out.println(resultOK);
         return resultOK;
         
+    }
+        public boolean update(int nb){
+        String url = Statics.BASE_URL + "api/update/quiz?nb="+nb;
+        req.setUrl(url);// Insertion de l'URL de notre demande de connexion
+        req.setPost(true);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        System.out.println(resultOK);
+        return resultOK;
     }
 
 }

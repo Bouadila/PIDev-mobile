@@ -19,6 +19,7 @@
 package com.mycompany.pidevapp.gui;
 
 import Entities.User;
+import GUI.Candidature.AfficherCandidatureEnt;
 import GUI.Formation.AfficherFormation;
 import static GUI.User.Login.idaffiche;
 import GUI.User.compte;
@@ -31,6 +32,7 @@ import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import static com.mycompany.ListSerie.MyApplication.theme;
 import services.UserService;
 
 /**
@@ -68,6 +70,14 @@ public class BaseForm extends Form {
         if (isCurrentOffre()) {
             offreImage = selection;
         }
+        Image mapImage = null;
+        if (isCurrentMapImage()) {
+            mapImage = selection;
+        }
+         Image CandidatCandidature = null;
+        if (isCurrentCandidature()) {
+            CandidatCandidature = selection;
+        }
 
 //        Button inboxButton = new Button("Inbox", inboxImage);
 //        inboxButton.setUIID("SideCommand");
@@ -87,13 +97,15 @@ public class BaseForm extends Form {
             new ShowCandidatOffreForm().show();
         });
        }
+     
+        getToolbar().addCommandToSideMenu("Candidature", CandidatCandidature, e -> {
+             new AfficherCandidatureEnt(res).show();
+        });
         getToolbar().addCommandToSideMenu("Formation", FormationImage, e -> {
             new AfficherFormation(res).show();
         });
         getToolbar().addCommandToSideMenu("Noter Rendez Vous", calendarImage, e -> new CalendarForm(res).show());
-        getToolbar().addCommandToSideMenu("Contact", null, e -> {
-        });
-        getToolbar().addCommandToSideMenu("Map", null, e -> {
+        getToolbar().addCommandToSideMenu("Map", mapImage, e -> {
             new AboutUs().show();
         });
 
@@ -127,5 +139,10 @@ public class BaseForm extends Form {
     protected boolean isCurrentOffre() {
         return false;
     }
-
+    protected boolean isCurrentMapImage() {
+        return false;
+    }
+     protected boolean isCurrentCandidature() {
+        return false;
+    }
 }

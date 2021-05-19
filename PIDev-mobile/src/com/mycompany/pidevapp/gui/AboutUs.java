@@ -5,6 +5,8 @@
  */
 package com.mycompany.pidevapp.gui;
 
+import com.codename1.components.ImageViewer;
+import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.googlemaps.MapContainer;
 import com.codename1.maps.Coord;
@@ -12,28 +14,36 @@ import com.codename1.maps.MapListener;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.EncodedImage;
+import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
+import com.codename1.ui.Label;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
 import static com.mycompany.ListSerie.MyApplication.theme;
+import java.io.IOException;
 
 /**
  *
  * @author Djo
  */
 public class AboutUs extends BaseForm{
-    
+    @Override
+    protected boolean isCurrentMapImage() {
+        return true;
+    }
     public AboutUs(){
         installSidemenu(theme);
         setLayout(BoxLayout.y());
         final MapContainer cnt = new MapContainer("");
-        cnt.setPreferredH(1115);
-        cnt.setPreferredW(1115);
+        cnt.setPreferredH(1000);
+        cnt.setPreferredW(1000);
         cnt.setCameraPosition(new Coord(36.8993187, 10.1930525));//this breaks the code //because the Google map is not loaded yet
-        Container container = new Container();
+        Container container = new Container(new BorderLayout());
         Coord center = new Coord(36.8993187, 10.1930525);
         cnt.addMapListener(new MapListener() {
 
@@ -63,8 +73,34 @@ public class AboutUs extends BaseForm{
                 }
             });
         cnt.zoom(center, 14);
-        container.add(cnt);
+        
+        Font largeBoldMonospaceFont = Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
+
+        SpanLabel lb = createForFont(largeBoldMonospaceFont,"Recruitini est une, application  pour les chercheurs  d'emploi  et qui vise à rendre la vie  plus facile  pour les demandeurs  et surtout pour les jeunes chercheurs");
+        Font font = Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_LARGE);
+        Label ll=createForFontl(largeBoldMonospaceFont,"Visitez notre bureau:");
+        ll.setPreferredH(200);
+        ll.getAllStyles().setFgColor(255);
+        Container c = new Container(BoxLayout.y());
+        ImageViewer Logo = null;
+        try {
+        Logo = new ImageViewer(Image.createImage("/recruitini-logo.png"));
+        } catch (IOException ex) {
+        }
+        c.addAll(Logo ,lb, ll);
+        container.add(BorderLayout.SOUTH, cnt).add(BorderLayout.NORTH, c);
         add(container);
+    }
+    
+    private SpanLabel createForFont(Font fnt, String s) {
+        SpanLabel l = new SpanLabel(s);
+        l.getUnselectedStyle().setFont(fnt);
+        return l;
+    }
+    private Label createForFontl(Font fnt, String s) {
+        Label l = new Label(s);
+        l.getUnselectedStyle().setFont(fnt);
+        return l;
     }
     
 }

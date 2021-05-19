@@ -1,5 +1,7 @@
 package com.mycompany.ListSerie;
 
+import GUI.Candidature.AfficherCandidatureEnt;
+import GUI.Candidature.AjouterCandidature;
 import GUI.Formation.AjouterFormation;
 import GUI.User.ActiveUser;
 import GUI.User.Login;
@@ -63,9 +65,9 @@ public class MyApplication {
 //        fo.show();
 
 //        new ActiveUser().show();
-        
+////        
             new Login().show();
-//        new AjouterFormation(theme).show();
+
 
     }
 

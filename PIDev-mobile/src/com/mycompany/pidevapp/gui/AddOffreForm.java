@@ -171,8 +171,17 @@ public class AddOffreForm  extends BaseForm{
                           salaire.text("");
                           nbPlace.text("");
                           min.text("");
-                          max.text("");
-                          new ShowOffreForm().show();
+                          max.text("");   Dialog dig = new Dialog("Confirmation");
+               
+                        if(dig.show("Confirmation","Vous voulez ajouter un quizz","Annuler","Oui")){
+
+                             new ShowOffreForm().show();
+                        }
+                        else {
+                            new QuizAddForm().show();
+                          }
+
+               
                         }
                         else
                         {Dialog.show("ERROR", "Server error", new Command("OK"));}

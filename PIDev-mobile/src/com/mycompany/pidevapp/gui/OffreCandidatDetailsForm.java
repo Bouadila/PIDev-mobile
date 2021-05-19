@@ -5,6 +5,7 @@
  */
 package com.mycompany.pidevapp.gui;
 
+import GUI.Candidature.AjouterCandidature;
 import com.codename1.components.ImageViewer;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
@@ -71,6 +72,9 @@ public class OffreCandidatDetailsForm extends BaseForm{
         Label DescriptionText=new Label();
         DescriptionText.setText(offre.getDescription());
         Button btnPostuler = new Button("Postuler");
+        btnPostuler.addActionListener(e->{
+            new AjouterCandidature(theme,offre.getId()).show();
+        });
         Stroke borderStroke = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
         Style butStyle = btnPostuler.getAllStyles();
                 butStyle.setBorder(RoundRectBorder.create().

@@ -39,6 +39,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import GUI.Candidature.AfficherCandidatureCand;
+import com.codename1.ext.filechooser.FileChooser;
 /**
  *
  * @author A.L.I.C.E
@@ -58,7 +60,7 @@ public class AjouterCandidature extends BaseForm {
         
         super.installSidemenu(res);
         
-        Form AfficherCandidature = null;
+        Form AfficherCandidatureCand = null;
         Resources theme = null;
         Label space = new Label("   ");
         //this.getAllStyles().setBgImage(theme.getImage("backgroundForm.jpg"));
@@ -66,20 +68,21 @@ public class AjouterCandidature extends BaseForm {
         getToolbar().addMaterialCommandToLeftBar(
                 "",
                 FontImage.MATERIAL_ARROW_BACK,
-                (ev) -> AfficherCandidature.show());
+                (ev) -> AfficherCandidatureCand.show());
         
         
         
         img1.addActionListener((ActionEvent e) -> {
+            
             if (FileChooser.isAvailable()) {
                 FileChooser.setOpenFilesInPlace(true);
-                FileChooser.showOpenDialog(multiSelect.isSelected(), ".jpg, .jpeg, .png/plain", (ActionEvent e2) -> {
+                FileChooser.showOpenDialog(".pdf", (ActionEvent e2) -> {
                     if (e2 == null || e2.getSource() == null) {
                         add("No file was selected");
                         revalidate();
                         return;
                     }
-                    if (multiSelect.isSelected()) {
+                    else  {
                         String[] paths = (String[]) e2.getSource();
                         for (String path : paths) {
                             System.out.println(path);

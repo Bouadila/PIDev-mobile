@@ -28,7 +28,7 @@ public class MyApplication {
         // use two network threads instead of one
         updateNetworkThreadCount(2);
 
-        theme = UIManager.initFirstTheme("/theme");
+        theme = UIManager.initFirstTheme("/theme_1");
 
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
@@ -55,11 +55,11 @@ public class MyApplication {
         }
 
         ShowOffreForm fo = new ShowOffreForm();
-        fo.show();
+//        fo.show();
 
 //        new ResetPwdCode().show();
         
-//            new Login().show();
+            new Login().show();
 
     }
 

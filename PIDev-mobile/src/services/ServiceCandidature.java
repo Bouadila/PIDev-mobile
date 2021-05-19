@@ -52,9 +52,10 @@ public class ServiceCandidature {
      
      public void AjouterCandidature(Candidature candidature)
      {
-         String url= Statics.BASE_URL+"/candidature/add_candidature?num="+candidature.getNum()+"&status="+candidature.getStatus()+"&diplome="+candidature.getDiplome()+"&cv="+candidature.getCv()+"&offre_id="+"4"+"&candidat_id="+"4";
+         String url= Statics.BASE_URL+"/candidature/add_candidature?num="+candidature.getNum()+"&status="+candidature.getStatus()+"&diplome="+candidature.getDiplome()+"&cv="+candidature.getCv();
          ////http://127.0.0.1:8000/candidature/add_candidature?num=Candidature.getNum()&status=test&diplome=etst&cv=test.pdf&offre_id=4&candidat_id=4
          //num="+candidature.getNum()+"&
+         System.out.println("data =="+url);
          req.addResponseListener((e)->{
            req.setUrl(url);  
            String str = new String(req.getResponseData()) ; 

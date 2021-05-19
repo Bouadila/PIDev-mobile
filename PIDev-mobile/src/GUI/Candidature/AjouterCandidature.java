@@ -34,8 +34,10 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import com.codename1.ext.filechooser.FileChooser;
+
 import com.codename1.ui.CheckBox;
+import com.codename1.ui.ComboBox;
+import java.util.Map;
 /**
  *
  * @author A.L.I.C.E
@@ -66,72 +68,72 @@ public class AjouterCandidature extends BaseForm {
                 (ev) -> AfficherCandidatureCand.show());
         
         
-        CheckBox multiSelect = new CheckBox("Multi-select");
-        img1.addActionListener((ActionEvent e) -> {
-            
-            if (FileChooser.isAvailable()) {
-                FileChooser.setOpenFilesInPlace(true);
-                FileChooser.showOpenDialog(".pdf", (ActionEvent e2) -> {
-                    if (e2 == null || e2.getSource() == null) {
-                        add("No file was selected");
-                        revalidate();
-                        return;
-                    }
-                    if (multiSelect.isSelected()) {
-                        String[] paths = (String[]) e2.getSource();
-                        for (String path : paths) {
-                            System.out.println(path);
-                            CN.execute(path);
-                        }
-                        return;
-                    }
-
-                    String file = (String) e2.getSource();
-                    if (file == null) {
-                        add("No file was selected");
-                        revalidate();
-                    } else {
-                        Image logo;
-
-                        try {
-                            logo = Image.createImage(file).scaledHeight(500);;
-                            add(logo);
-                            String imageFile = FileSystemStorage.getInstance().getAppHomePath() + "photo.png";
-
-                            try (OutputStream os = FileSystemStorage.getInstance().openOutputStream(imageFile)) {
-                                System.out.println(imageFile);
-                                ImageIO.getImageIO().save(logo, os, ImageIO.FORMAT_PNG, 1);
-                            } catch (IOException err) {
-                            }
-                        } catch (IOException ex) {
-                        }
-
-                        String extension = null;
-                        if (file.lastIndexOf(".") > 0) {
-                            extension = file.substring(file.lastIndexOf(".") + 1);
-                            StringBuilder hi = new StringBuilder(file);
-                            if (file.startsWith("file://")) {
-                                hi.delete(0, 7);
-                            }
-                            int lastIndexPeriod = hi.toString().lastIndexOf(".");
-                            Log.p(hi.toString());
-                            String ext = hi.toString().substring(lastIndexPeriod);
-                            String hmore = hi.toString().substring(0, lastIndexPeriod - 1);
-                            try {
-                                String namePic = saveFileToDevice(file, ext);
-                                System.out.println(namePic);
-                            } catch (IOException ex) {
-                            }
-
-                            revalidate();
-
-                        
-                    }
-                    }
-                        });
-            }
-                });
-        
+//        CheckBox multiSelect = new CheckBox("Multi-select");
+//        img1.addActionListener((ActionEvent e) -> {
+//            
+//            if (FileChooser.isAvailable()) {
+//                FileChooser.setOpenFilesInPlace(true);
+//                FileChooser.showOpenDialog(".pdf", (ActionEvent e2) -> {
+//                    if (e2 == null || e2.getSource() == null) {
+//                        add("No file was selected");
+//                        revalidate();
+//                        return;
+//                    }
+//                    if (multiSelect.isSelected()) {
+//                        String[] paths = (String[]) e2.getSource();
+//                        for (String path : paths) {
+//                            System.out.println(path);
+//                            CN.execute(path);
+//                        }
+//                        return;
+//                    }
+//
+//                    String file = (String) e2.getSource();
+//                    if (file == null) {
+//                        add("No file was selected");
+//                        revalidate();
+//                    } else {
+//                        Image logo;
+//
+//                        try {
+//                            logo = Image.createImage(file).scaledHeight(500);;
+//                            add(logo);
+//                            String imageFile = FileSystemStorage.getInstance().getAppHomePath() + "photo.png";
+//
+//                            try (OutputStream os = FileSystemStorage.getInstance().openOutputStream(imageFile)) {
+//                                System.out.println(imageFile);
+//                                ImageIO.getImageIO().save(logo, os, ImageIO.FORMAT_PNG, 1);
+//                            } catch (IOException err) {
+//                            }
+//                        } catch (IOException ex) {
+//                        }
+//
+//                        String extension = null;
+//                        if (file.lastIndexOf(".") > 0) {
+//                            extension = file.substring(file.lastIndexOf(".") + 1);
+//                            StringBuilder hi = new StringBuilder(file);
+//                            if (file.startsWith("file://")) {
+//                                hi.delete(0, 7);
+//                            }
+//                            int lastIndexPeriod = hi.toString().lastIndexOf(".");
+//                            Log.p(hi.toString());
+//                            String ext = hi.toString().substring(lastIndexPeriod);
+//                            String hmore = hi.toString().substring(0, lastIndexPeriod - 1);
+//                            try {
+//                                String namePic = saveFileToDevice(file, ext);
+//                                System.out.println(namePic);
+//                            } catch (IOException ex) {
+//                            }
+//
+//                            revalidate();
+//
+//                        
+//                    }
+//                    }
+//                        });
+//            }
+//                });
+//        
         
         
        Label FormTitle = new Label("Ajouter Candidature");
@@ -144,6 +146,8 @@ public class AjouterCandidature extends BaseForm {
         TextField status = new TextField("", "Status", 15, TextField.EMAILADDR);
         addStringValue("status",status);
         status.setUIID("SignInForm");
+
+
         
         TextField diplome = new TextField("", "Diplome", 15, TextField.EMAILADDR);
         addStringValue("diplome",diplome);

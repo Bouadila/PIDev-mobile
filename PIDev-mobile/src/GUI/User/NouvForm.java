@@ -50,13 +50,13 @@ public class NouvForm extends Form  {
         });
                 Style loginStyle = getAllStyles();
           User listu = UserService.getInstance().profilUser(12);
-
-           ImageViewer Logo1 = null;
-        try {
-            Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
-        } catch (IOException ex) {
-        }
-        loginStyle.setBgImage(Logo1.getImage());
+//
+//           ImageViewer Logo1 = null;
+//        try {
+//            Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
+//        } catch (IOException ex) {
+//        }
+//        loginStyle.setBgImage(Logo1.getImage());
 //        super.addSideMenu(theme);
         
         Tabs swipe = new Tabs();
@@ -114,7 +114,7 @@ ImageViewer Logo = null;
         } catch (IOException ex) {
         }
        
-        loginStyle.setBgImage(Logo1.getImage());
+//        loginStyle.setBgImage(Logo1.getImage());
                 Container c9 = new Container(BoxLayout.x());
 c9.add(Logo);
         

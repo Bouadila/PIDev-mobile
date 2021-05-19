@@ -18,6 +18,8 @@ public class User {
             color ,roles ,created_at;
     private  Date date_naiss ;
 
+  
+
 
     public String getEtatecrit() {
         return etatecrit;
@@ -26,12 +28,11 @@ public class User {
     public void setEtatecrit(String etatecrit) {
         this.etatecrit = etatecrit;
     }
- public User(String email, String name, String prenom, String special, String gover, String img, String password, String roles) {
+ public User(String email, String name, String prenom, String special, String gover, String password, String roles) {
    this.email = email;
         this.name = name;
         this.prenom = prenom;
         this.gover = gover;
-        this.img = img;
         this.special = special;
          this.password = password;
          this.roles = roles;
@@ -199,5 +200,4 @@ public class User {
     public String toString() {
         return "User{"  +  "id=" + id+ " email=" + email + ", password=" + password + ", name=" + name + ", prenom=" + prenom + ", gover=" + gover + ", img=" + img + ", special=" + special + ", nom_entre=" + nom_entre + ", activation_token=" + activation_token + ", reset_token=" + reset_token + ", etat=" + etat + ", color=" + color + ", roles=" + roles + ", date_naiss=" + date_naiss + '}';
     }
-
 }

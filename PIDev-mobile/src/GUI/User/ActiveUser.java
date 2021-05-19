@@ -56,13 +56,13 @@ public class ActiveUser extends Form {
             Logo = new ImageViewer(Image.createImage("/recruitini-logo.png"));
         } catch (IOException ex) {
         }
-                ImageViewer Logo1 = null;
-
-         try {
-            Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
-        } catch (IOException ex) {
-        }
-        loginStyle.setBgImage(Logo1.getImage());
+//                ImageViewer Logo1 = null;
+//
+//         try {
+//            Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
+//        } catch (IOException ex) {
+//        }
+//        loginStyle.setBgImage(Logo1.getImage());
 
         /**
          * ***********************************************************************************************
@@ -123,16 +123,18 @@ public class ActiveUser extends Form {
          * ***********************************************************************************************
          */
        Button inscrire = new Button("s'inscrire");
+       inscrire.setUIID("CenterLabel");
         Style butStyle2 = inscrire.getAllStyles();
-        butStyle2.setFgColor(0xffffff);
-        butStyle2.setBgTransparency(0);
+//        butStyle2.setFgColor(0xffffff);
+//        butStyle2.setBgTransparency(0);
         butStyle2.setMarginUnit(Style.UNIT_TYPE_DIPS);
         butStyle2.setMargin(Component.TOP, 0);
      
          Button login = new Button("Login");
+          login.setUIID("CenterLabel");
         Style butStyle3 = login.getAllStyles();
-        butStyle3.setFgColor(0xffffff);
-        butStyle3.setBgTransparency(0);
+//        butStyle3.setFgColor(0xffffff);
+//        butStyle3.setBgTransparency(0);
         butStyle3.setMarginUnit(Style.UNIT_TYPE_DIPS);
         butStyle3.setMargin(Component.TOP, 0);
         /**

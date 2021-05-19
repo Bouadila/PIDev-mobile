@@ -56,6 +56,7 @@ import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.spinner.Picker;
 import com.codename1.ui.util.Resources;
 import static com.mycompany.ListSerie.MyApplication.theme;
+import com.mycompany.pidevapp.gui.BaseForm;
 import java.io.IOException;
 import java.util.ArrayList;
 import static java.util.Collections.list;
@@ -75,12 +76,13 @@ import static services.UserService.a;
  *
  * @author USER
  */
-public class compte extends Form {
-
-       Form current;
-    public compte(){
-    current=this;
+public class compte extends BaseForm{
     
+   
+        Form current;
+        public compte(){
+        installSidemenu(theme);
+        current=this;
         setTitle("Compte");
         setLayout(BoxLayout.y());
         getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_PUBLIC, e -> {
@@ -88,12 +90,12 @@ public class compte extends Form {
                 Style loginStyle = getAllStyles();
           User listu = UserService.getInstance().profilUser(idaffiche);
 
-           ImageViewer Logo1 = null;
-        try {
-            Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
-        } catch (IOException ex) {
-        }
-        loginStyle.setBgImage(Logo1.getImage());
+//           ImageViewer Logo1 = null;
+//        try {
+//            Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
+//        } catch (IOException ex) {
+//        }
+//        loginStyle.setBgImage(Logo1.getImage());
 //        super.addSideMenu(theme);
          System.out.println("idaffiche profil : " +idaffiche);
 
@@ -112,13 +114,13 @@ public class compte extends Form {
         int size = Display.getInstance().convertToPixels(1);
         Image unselectedWalkthru = Image.createImage(size, size, 0);
         Graphics g = unselectedWalkthru.getGraphics();
-        g.setColor(0xffffff);
+        g.setColor(0x000000);
         g.setAlpha(100);
         g.setAntiAliased(true);
         g.fillArc(0, 0, size, size, 0, 360);
         Image selectedWalkthru = Image.createImage(size, size, 0);
         g = selectedWalkthru.getGraphics();
-        g.setColor(0xffffff);
+        g.setColor(0x000000);
         g.setAntiAliased(true);
         g.fillArc(0, 0, size, size, 0, 360);
         RadioButton[] rbs = new RadioButton[swipe.getTabCount()];
@@ -152,7 +154,7 @@ ImageViewer Logo = null;
         } catch (IOException ex) {
         }
        
-        loginStyle.setBgImage(Logo1.getImage());
+//        loginStyle.setBgImage(Logo.getImage());
                 Container c9 = new Container(BoxLayout.x());
 c9.add(Logo);
         
@@ -161,7 +163,7 @@ c9.add(Logo);
         Style userStyle = lbemail.getAllStyles();
         userStyle.setBorder(RoundRectBorder.create().
                 strokeOpacity(120));
-        userStyle.setFgColor(0xffffff);
+        userStyle.setFgColor(0x000000);
         userStyle.setMargin(Component.BOTTOM, 0);
         userStyle.setMargin(Component.TOP, 0);
 
@@ -173,7 +175,7 @@ c9.add(Logo);
         Style userStyle1 = lbusername.getAllStyles();
         userStyle1.setBorder(RoundRectBorder.create().
                 strokeOpacity(120));
-        userStyle1.setFgColor(0xffffff);
+        userStyle1.setFgColor(0x000000);
         userStyle1.setMargin(Component.BOTTOM, 0);
         userStyle1.setMargin(Component.TOP, 0);
 
@@ -185,7 +187,7 @@ c9.add(Logo);
         Style userStyle3 = lbprenom.getAllStyles();
         userStyle3.setBorder(RoundRectBorder.create().
                 strokeOpacity(120));
-        userStyle3.setFgColor(0xffffff);
+        userStyle3.setFgColor(0x000000);
         userStyle3.setMarginUnit(Style.UNIT_TYPE_DIPS);
                 userStyle3.setMargin(Component.BOTTOM, 0);
         userStyle3.setMargin(Component.TOP, 0);
@@ -197,7 +199,7 @@ c9.add(Logo);
         Style userStyle4 = lbimg.getAllStyles();
         userStyle4.setBorder(RoundRectBorder.create().
                 strokeOpacity(120));
-        userStyle4.setFgColor(0xffffff);
+        userStyle4.setFgColor(0x000000);
          userStyle4.setMargin(Component.BOTTOM, 0);
          userStyle4.setMargin(Component.TOP, 0);
      
@@ -209,7 +211,7 @@ c9.add(Logo);
         Style userStyle5 = lbgover.getAllStyles();
         userStyle5.setBorder(RoundRectBorder.create().
                 strokeOpacity(120) );
-        userStyle5.setFgColor(0xffffff);
+        userStyle5.setFgColor(0x000000);
         userStyle5.setMargin(Component.BOTTOM, 0);
          userStyle5.setMargin(Component.TOP, 0);
 
@@ -224,7 +226,7 @@ c9.add(Logo);
         userStyle6.setMargin(Component.BOTTOM, 0);
          userStyle6.setMargin(Component.TOP, 0);
 
-        userStyle6.setFgColor(0xffffff);
+        userStyle6.setFgColor(0x000000);
         userStyle6.setMarginUnit(Style.UNIT_TYPE_DIPS);
         c6.add(lbspecial);
 
@@ -240,7 +242,7 @@ c9.add(Logo);
         strokeOpacity(120) );
         butStyle.setBgColor(0x9b0244);
         butStyle.setBgTransparency(255);
-        butStyle.setFgColor(0xffffff);
+        butStyle.setFgColor(0x000000);
          butStyle.setMarginUnit(Style.UNIT_TYPE_DIPS);
         butStyle.setMargin(Component.BOTTOM, 1);
         butStyle.setMargin(Component.TOP, 0);
@@ -253,7 +255,7 @@ c9.add(Logo);
         strokeOpacity(120) );
         Stylec.setBgColor(0x9b0244);
         Stylec.setBgTransparency(255);
-        Stylec.setFgColor(0xffffff);
+        Stylec.setFgColor(0x000000);
         Stylec.setMarginUnit(Style.UNIT_TYPE_DIPS);
         Stylec.setMargin(Component.BOTTOM, 1);
         Stylec.setMargin(Component.TOP, 0);

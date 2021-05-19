@@ -53,7 +53,7 @@ import static services.UserService.a;
  * @author USER
  */
 public class ResetPwd  extends Form  {
-  public static  TextField emailee;
+  public static  String emailee;
      Form current;
    public static int randomCode;
    public static String kk ;
@@ -93,8 +93,8 @@ public class ResetPwd  extends Form  {
         /**
          * ***********************************************************************************************
          */
-        TextField emailee = new TextField("", "Saisir votre email");
-        Style userStyle = emailee.getAllStyles();
+        TextField emailee1 = new TextField("", "Saisir votre email");
+        Style userStyle = emailee1.getAllStyles();
         Stroke borderStroke = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
         userStyle.setBorder(RoundRectBorder.create().
                 strokeColor(0).
@@ -110,7 +110,7 @@ public class ResetPwd  extends Form  {
          * ***********************************************************************************************
          */
      
-        cnt2.addAll(emailee);
+        cnt2.addAll(emailee1);
         cnt1.add(Logo);
         /**
          * ***********************************************************************************************
@@ -211,8 +211,9 @@ public class ResetPwd  extends Form  {
         
         btnval.addActionListener(e-> {
                 
-                   String u = UserService.getInstance().getPasswordByEmail(emailee.getText());
+                   String u = UserService.getInstance().getPasswordByEmail(emailee1.getText());
                    System.out.println("password = " + u);
+                   emailee = emailee1.getText();
 
                           if(u.equals("user not found"))
                         { 
@@ -236,8 +237,8 @@ public class ResetPwd  extends Form  {
         String host ="smtp.gmail.com" ;
         String from ="pidevtestad@gmail.com" ;
         String password ="pidevtestad123456" ;
-        String to = emailee.getText();
-        jj = emailee.getText();
+        String to = emailee1.getText();
+        jj = emailee1.getText();
         String sub ="Mot de passe oublier " ;
         String msg ="Ton code est : " +randomCode ;
  

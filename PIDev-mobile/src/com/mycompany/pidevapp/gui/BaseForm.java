@@ -18,6 +18,10 @@
  */
 package com.mycompany.pidevapp.gui;
 
+import Entities.User;
+import static GUI.User.Login.idaffiche;
+import GUI.User.compte;
+import GUI.User.profil;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.Form;
@@ -26,6 +30,7 @@ import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import services.UserService;
 
 /**
  * Utility methods common to forms e.g. for binding the side menu
@@ -33,7 +38,8 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public class BaseForm extends Form {
-
+    User listu = UserService.getInstance().profilUser(idaffiche);
+    //listu.getRoles()
     public void installSidemenu(Resources res) {
         Image selection = res.getImage("selection-in-sidemenu.png");
 
@@ -42,9 +48,9 @@ public class BaseForm extends Form {
             CandidatOffre = selection;
         }
 
-        Image trendingImage = null;
-        if (isCurrentTrending()) {
-            trendingImage = selection;
+        Image ProfilImage = null;
+        if (isCurrentProfil()) {
+            ProfilImage = selection;
         }
 
         Image calendarImage = null;
@@ -71,12 +77,15 @@ public class BaseForm extends Form {
 //        inbox.setUIID("SideCommand");
 //        inboxButton.addActionListener(e -> new InboxForm().show());
 //        getToolbar().addComponentToSideMenu(inbox);
-        getToolbar().addCommandToSideMenu("Offre", offreImage, e -> {
+       if(this.listu.getRoles().equals("Employeur")){
+            getToolbar().addCommandToSideMenu("Offre", offreImage, e -> {
             new ShowOffreForm().show();
         });
-        getToolbar().addCommandToSideMenu("Offre Candidat", CandidatOffre, e -> {
+       }else{
+           getToolbar().addCommandToSideMenu("Offre", CandidatOffre, e -> {
             new ShowCandidatOffreForm().show();
         });
+       }
         getToolbar().addCommandToSideMenu("Formation", statsImage, e -> {
         });
         getToolbar().addCommandToSideMenu("Noter Rendez Vous", calendarImage, e -> new CalendarForm(res).show());
@@ -86,21 +95,22 @@ public class BaseForm extends Form {
             new AboutUs().show();
         });
 
-        getToolbar().addCommandToSideMenu("Profil", trendingImage, e -> {
+        getToolbar().addCommandToSideMenu("Profil", ProfilImage, e -> {
+            new profil(idaffiche).show();
         });
 
         // spacer
         getToolbar().addComponentToSideMenu(new Label(" ", "SideCommand"));
-        getToolbar().addComponentToSideMenu(new Label(res.getImage("profile_image.png"), "Container"));
-        getToolbar().addComponentToSideMenu(new Label("Detra Mcmunn", "SideCommandNoPad"));
-        getToolbar().addComponentToSideMenu(new Label("Long Beach, CA", "SideCommandSmall"));
+        getToolbar().addComponentToSideMenu(new Label(res.getImage("user-male.png"), "Container"));
+        getToolbar().addComponentToSideMenu(new Label(listu.getName()+" "+listu.getPrenom(), "SideCommandNoPad"));
+        getToolbar().addComponentToSideMenu(new Label(listu.getRoles(), "SideCommandSmall"));
     }
 
     protected boolean isCurrentCandidatOffre() {
         return false;
     }
 
-    protected boolean isCurrentTrending() {
+    protected boolean isCurrentProfil() {
         return false;
     }
 

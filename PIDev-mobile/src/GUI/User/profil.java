@@ -27,6 +27,7 @@ import com.codename1.ui.plaf.RoundRectBorder;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import static com.mycompany.ListSerie.MyApplication.theme;
+import com.mycompany.pidevapp.gui.BaseForm;
 import java.io.IOException;
 import services.UserService;
 import static services.UserService.a;
@@ -35,22 +36,27 @@ import static services.UserService.a;
  *
  * @author USER
  */
-public class profil  extends Form {
+public class profil  extends BaseForm {
+    @Override
+    protected boolean isCurrentProfil() {
+        return true;
+    }
+   
     Form current;
     public profil(int id) {
+        installSidemenu(theme);
         current = this;
         setTitle("Acceuil");
         setLayout(BoxLayout.y());
         Style loginStyle = getAllStyles();
       
-
           
-        ImageViewer Logo1 = null;
-        try {
-            Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
-        } catch (IOException ex) {
-        }
-        loginStyle.setBgImage(Logo1.getImage());
+//        ImageViewer Logo1 = null;
+//        try {
+//            Logo1 = new ImageViewer(Image.createImage("/back.jpg"));
+//        } catch (IOException ex) {
+//        }
+//        loginStyle.setBgImage(Logo1.getImage());
 
         ImageViewer Logo = null;
         try {

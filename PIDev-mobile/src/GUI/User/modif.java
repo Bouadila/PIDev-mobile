@@ -25,6 +25,8 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.RoundRectBorder;
 import com.codename1.ui.plaf.Style;
+import static com.mycompany.ListSerie.MyApplication.theme;
+import com.mycompany.pidevapp.gui.BaseForm;
 import java.io.IOException;
 import services.UserService;
 
@@ -32,20 +34,21 @@ import services.UserService;
  *
  * @author USER
  */
-public class modif  extends Form{
+public class modif  extends BaseForm{
      Form current;
     public modif(int id){
+        installSidemenu(theme);
     current=this;
      setTitle("Modifier Compte");
         setLayout(BoxLayout.y());
         Style loginStyle = getAllStyles();
-         ImageViewer Logo1 = null;
-        try {
-             Logo1 = new ImageViewer(com.codename1.ui.Image.createImage("/back.jpg"));
-        } catch (IOException ex) {
-        }
-        
-        loginStyle.setBgImage(Logo1.getImage());
+//         ImageViewer Logo1 = null;
+//        try {
+//             Logo1 = new ImageViewer(com.codename1.ui.Image.createImage("/back.jpg"));
+//        } catch (IOException ex) {
+//        }
+//        
+//        loginStyle.setBgImage(Logo1.getImage());
                   User listu = UserService.getInstance().profilUser(idaffiche);
 
         Container c0 = new Container(BoxLayout.x());
@@ -122,19 +125,19 @@ public class modif  extends Form{
 //    
 //       butStyle0.setFgColor(0xffffff);
 //       
-        Label lbimg = new Label("Image :              ");
-        TextField tximg = new TextField(listu.getImg(), "Image");
-        Style userStyle4 = tximg.getAllStyles();
-        Stroke borderStroke4 = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
-        userStyle4.setBorder(RoundRectBorder.create().
-                strokeColor(0).
-                strokeOpacity(120).
-                stroke(borderStroke4));
-        userStyle4.setBgColor(0xffffff);
-        userStyle4.setBgTransparency(255);
-        userStyle4.setMarginUnit(Style.UNIT_TYPE_DIPS);
-        c4.add(lbimg);
-        c4.add(tximg);
+//        Label lbimg = new Label("Image :              ");
+//        TextField tximg = new TextField(listu.getImg(), "Image");
+//        Style userStyle4 = tximg.getAllStyles();
+//        Stroke borderStroke4 = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
+//        userStyle4.setBorder(RoundRectBorder.create().
+//                strokeColor(0).
+//                strokeOpacity(120).
+//                stroke(borderStroke4));
+//        userStyle4.setBgColor(0xffffff);
+//        userStyle4.setBgTransparency(255);
+//        userStyle4.setMarginUnit(Style.UNIT_TYPE_DIPS);
+//        c4.add(lbimg);
+//        c4.add(tximg);
         
         Container c5 = new Container(BoxLayout.x());
         Label lbgover = new Label("Governorat :     ");
@@ -144,7 +147,7 @@ public class modif  extends Form{
         userStyle5.setBorder(RoundRectBorder.create().
                 strokeColor(0).
                 strokeOpacity(120).
-                stroke(borderStroke4));
+                stroke(borderStroke5));
         userStyle5.setBgColor(0xffffff);
         userStyle5.setBgTransparency(255);
         userStyle5.setMarginUnit(Style.UNIT_TYPE_DIPS);
@@ -159,7 +162,7 @@ public class modif  extends Form{
         userStyle6.setBorder(RoundRectBorder.create().
                 strokeColor(0).
                 strokeOpacity(120).
-                stroke(borderStroke4));
+                stroke(borderStroke5));
         userStyle6.setBgColor(0xffffff);
         userStyle6.setBgTransparency(255);
         userStyle6.setMarginUnit(Style.UNIT_TYPE_DIPS);
@@ -192,7 +195,7 @@ public class modif  extends Form{
             @Override
             public void actionPerformed(ActionEvent evt) {
            
-                if ((txpsw.getText().length()==0)||(txusername.getText().length()==0)||(txemail.getText().length()==0)||(txprenom.getText().length()==0)||(txtgover.getText().length()==0)||(tximg.getText().length()==0))
+                if ((txpsw.getText().length()==0)||(txusername.getText().length()==0)||(txemail.getText().length()==0)||(txprenom.getText().length()==0)||(txtgover.getText().length()==0))
                 {  Dialog.show("Alert", "vous devez Remplir tt les champs", new Command("OK"));}
                 else
                 {
@@ -202,7 +205,7 @@ public class modif  extends Form{
                   String Role="Candidat";
                   
                         System.out.println("password"+idaffiche);
-                        User u = UserService.getInstance().editUser(idaffiche,txemail.getText(),txusername.getText(),txpsw.getText(),txprenom.getText(),txtspecial.getText(),txtgover.getText(),tximg.getText());
+                        User u = UserService.getInstance().editUser(idaffiche,txemail.getText(),txusername.getText(),txpsw.getText(),txprenom.getText(),txtspecial.getText(),txtgover.getText());
                                       new  profil(idaffiche).show();                        
 
                    }

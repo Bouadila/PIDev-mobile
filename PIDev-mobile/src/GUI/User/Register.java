@@ -141,20 +141,20 @@ public class Register extends Form {
         c3.add(lbprenom);
         c3.add(txprenom);
         
-        Container c4 = new Container(BoxLayout.x());
-        Label lbimg = new Label("Image :              ");
-        TextField tximg = new TextField("", "Image");
-        Style userStyle4 = tximg.getAllStyles();
-        Stroke borderStroke4 = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
-        userStyle4.setBorder(RoundRectBorder.create().
-                strokeColor(0).
-                strokeOpacity(120).
-                stroke(borderStroke4));
-        userStyle4.setBgColor(0xffffff);
-        userStyle4.setBgTransparency(255);
-        userStyle4.setMarginUnit(Style.UNIT_TYPE_DIPS);
-        c4.add(lbimg);
-        c4.add(tximg);
+//        Container c4 = new Container(BoxLayout.x());
+//        Label lbimg = new Label("Image :              ");
+//        TextField tximg = new TextField("", "Image");
+//        Style userStyle4 = tximg.getAllStyles();
+//        Stroke borderStroke4 = new Stroke(2, Stroke.CAP_SQUARE, Stroke.JOIN_MITER, 1);
+//        userStyle4.setBorder(RoundRectBorder.create().
+//                strokeColor(0).
+//                strokeOpacity(120).
+//                stroke(borderStroke4));
+//        userStyle4.setBgColor(0xffffff);
+//        userStyle4.setBgTransparency(255);
+//        userStyle4.setMarginUnit(Style.UNIT_TYPE_DIPS);
+//        c4.add(lbimg);
+//        c4.add(tximg);
         
         Container c5 = new Container(BoxLayout.x());
         Label lbgover = new Label("Governorat :     ");
@@ -164,7 +164,7 @@ public class Register extends Form {
         userStyle5.setBorder(RoundRectBorder.create().
                 strokeColor(0).
                 strokeOpacity(120).
-                stroke(borderStroke4));
+                stroke(borderStroke5));
         userStyle5.setBgColor(0xffffff);
         userStyle5.setBgTransparency(255);
         userStyle5.setMarginUnit(Style.UNIT_TYPE_DIPS);
@@ -179,7 +179,7 @@ public class Register extends Form {
         userStyle6.setBorder(RoundRectBorder.create().
                 strokeColor(0).
                 strokeOpacity(120).
-                stroke(borderStroke4));
+                stroke(borderStroke5));
         userStyle6.setBgColor(0xffffff);
         userStyle6.setBgTransparency(255);
         userStyle6.setMarginUnit(Style.UNIT_TYPE_DIPS);
@@ -194,7 +194,7 @@ public class Register extends Form {
         userStyle7.setBorder(RoundRectBorder.create().
                 strokeColor(0).
                 strokeOpacity(120).
-                stroke(borderStroke4));
+                stroke(borderStroke5));
         userStyle7.setBgColor(0xf97878);
         userStyle7.setBgTransparency(255);
         userStyle7.setMarginUnit(Style.UNIT_TYPE_DIPS);
@@ -213,7 +213,7 @@ public class Register extends Form {
         Container c_f = new Container(BoxLayout.y());
         cnt1.addAll(lab1, gender ,lab2);
 
-        c_f.addAll(c1,c3,c0,c2,c4,c5,c6,cnt1);
+        c_f.addAll(c1,c3,c0,c2,c5,c6,cnt1);
                
         Button btValider = new Button("S'inscrire");
         Style butStyle = btValider.getAllStyles();
@@ -234,7 +234,7 @@ public class Register extends Form {
         @Override
                 public void actionPerformed(ActionEvent evt) {
                 String Role="";
-                if ((txpsw.getText().length()==0)||(txusername.getText().length()==0)||(txemail.getText().length()==0)||(txprenom.getText().length()==0)||(txtgover.getText().length()==0)||(tximg.getText().length()==0))
+                if ((txpsw.getText().length()==0)||(txusername.getText().length()==0)||(txemail.getText().length()==0)||(txprenom.getText().length()==0)||(txtgover.getText().length()==0))
                 {   Dialog.show("Alert", "vous devez Remplir tt les champs", new Command("OK"));}
                 else {
 //                       if (tximg.getText()!=null) {
@@ -251,7 +251,7 @@ public class Register extends Form {
                 Role +=  "Employeur\n";
             }
 
-                        User t = new User(txemail.getText(),txusername.getText(),txprenom.getText(),txtspecial.getText(),txtgover.getText(),tximg.getText(),txpsw.getText(),Role);
+                        User t = new User(txemail.getText(),txusername.getText(),txprenom.getText(),txtspecial.getText(),txtgover.getText(),txpsw.getText(),Role);
                         boolean use = UserService.getInstance().SignUp(t);
                         Dialog.show("Activation compte","nous avons envoyer un email",new Command("ok"));
 

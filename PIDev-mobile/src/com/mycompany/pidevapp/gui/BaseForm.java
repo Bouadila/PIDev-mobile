@@ -16,7 +16,6 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
-
 package com.mycompany.pidevapp.gui;
 
 import com.codename1.ui.Button;
@@ -34,25 +33,35 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public class BaseForm extends Form {
+
     public void installSidemenu(Resources res) {
         Image selection = res.getImage("selection-in-sidemenu.png");
-        
+
         Image CandidatOffre = null;
-        if(isCurrentCandidatOffre()) CandidatOffre = selection;
+        if (isCurrentCandidatOffre()) {
+            CandidatOffre = selection;
+        }
 
         Image trendingImage = null;
-        if(isCurrentTrending()) trendingImage = selection;
-        
+        if (isCurrentTrending()) {
+            trendingImage = selection;
+        }
+
         Image calendarImage = null;
-        if(isCurrentCalendar()) calendarImage = selection;
-        
+        if (isCurrentCalendar()) {
+            calendarImage = selection;
+        }
+
         Image statsImage = null;
-        if(isCurrentStats()) statsImage = selection;
-        
+        if (isCurrentStats()) {
+            statsImage = selection;
+        }
+
         Image offreImage = null;
-        if(isCurrentOffre()) offreImage = selection;
-        
-    
+        if (isCurrentOffre()) {
+            offreImage = selection;
+        }
+
 //        Button inboxButton = new Button("Inbox", inboxImage);
 //        inboxButton.setUIID("SideCommand");
 //        inboxButton.getAllStyles().setPaddingBottom(0);
@@ -62,15 +71,24 @@ public class BaseForm extends Form {
 //        inbox.setUIID("SideCommand");
 //        inboxButton.addActionListener(e -> new InboxForm().show());
 //        getToolbar().addComponentToSideMenu(inbox);
-        getToolbar().addCommandToSideMenu("Offre",offreImage, e -> {new ShowOffreForm().show();});
-        getToolbar().addCommandToSideMenu("Offre Candidat", CandidatOffre, e ->{new ShowCandidatOffreForm().show();});
-        getToolbar().addCommandToSideMenu("Formation", statsImage, e -> {});
+        getToolbar().addCommandToSideMenu("Offre", offreImage, e -> {
+            new ShowOffreForm().show();
+        });
+        getToolbar().addCommandToSideMenu("Offre Candidat", CandidatOffre, e -> {
+            new ShowCandidatOffreForm().show();
+        });
+        getToolbar().addCommandToSideMenu("Formation", statsImage, e -> {
+        });
         getToolbar().addCommandToSideMenu("Noter Rendez Vous", calendarImage, e -> new CalendarForm(res).show());
-        getToolbar().addCommandToSideMenu("Contact", null, e -> {});
-        getToolbar().addCommandToSideMenu("Profil", trendingImage, e ->{});
-        
-   
-        
+        getToolbar().addCommandToSideMenu("Contact", null, e -> {
+        });
+        getToolbar().addCommandToSideMenu("Map", null, e -> {
+            new AboutUs().show();
+        });
+
+        getToolbar().addCommandToSideMenu("Profil", trendingImage, e -> {
+        });
+
         // spacer
         getToolbar().addComponentToSideMenu(new Label(" ", "SideCommand"));
         getToolbar().addComponentToSideMenu(new Label(res.getImage("profile_image.png"), "Container"));
@@ -78,11 +96,10 @@ public class BaseForm extends Form {
         getToolbar().addComponentToSideMenu(new Label("Long Beach, CA", "SideCommandSmall"));
     }
 
-        
     protected boolean isCurrentCandidatOffre() {
         return false;
     }
-    
+
     protected boolean isCurrentTrending() {
         return false;
     }
@@ -94,9 +111,9 @@ public class BaseForm extends Form {
     protected boolean isCurrentStats() {
         return false;
     }
-    
+
     protected boolean isCurrentOffre() {
         return false;
     }
-   
+
 }

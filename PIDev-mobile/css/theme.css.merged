@@ -1,7 +1,20 @@
 
+<<<<<<< HEAD
 /* C:\Users\brahm\Desktop\3A27\Semestre2\PIDev-mobile\PIDev-mobile\css\theme.css */
+=======
+/* C:\Users\Djo\Documents\Firas\mobile\PIDev-mobile\PIDev-mobile\lib\impl\css\GoogleMaps\theme.css */
+/* CSS file for filechooser */
+
+/* end C:\Users\Djo\Documents\Firas\mobile\PIDev-mobile\PIDev-mobile\lib\impl\css\GoogleMaps\theme.css*/
+
+/* C:\Users\Djo\Documents\Firas\mobile\PIDev-mobile\PIDev-mobile\css\theme.css */
+>>>>>>> FirasBranch
 #Constants {
     includeNativeBool: true; 
 }
 
+<<<<<<< HEAD
 /* End C:\Users\brahm\Desktop\3A27\Semestre2\PIDev-mobile\PIDev-mobile\css\theme.css */
+=======
+/* End C:\Users\Djo\Documents\Firas\mobile\PIDev-mobile\PIDev-mobile\css\theme.css */
+>>>>>>> FirasBranch

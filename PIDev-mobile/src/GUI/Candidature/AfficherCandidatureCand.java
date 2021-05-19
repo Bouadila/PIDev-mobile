@@ -27,13 +27,12 @@ import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import java.util.ArrayList;
 import services.ServiceCandidature;
-import GUI.Candidature.AjouterCandidature;
 
 /**
  *
  * @author A.L.I.C.E
  */
-public class AfficherCandidature extends BaseForm {
+public class AfficherCandidatureCand extends BaseForm {
     
     @Override
        protected boolean isCurrentCalendar() {
@@ -43,7 +42,7 @@ public class AfficherCandidature extends BaseForm {
     Form current;
    String embededurl;
 
-    public AfficherCandidature(Resources res)  {
+    public AfficherCandidatureCand(Resources res)  {
 
 
         setLayout(new BorderLayout((BorderLayout.CENTER_BEHAVIOR_CENTER)));
@@ -75,10 +74,10 @@ public class AfficherCandidature extends BaseForm {
 
         //this.getAllStyles().setBgImage(theme.getImage("backgroundForm.jpg"));
         //this.getAllStyles().setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
-        getToolbar().addMaterialCommandToLeftBar(
-                "",
-                FontImage.MATERIAL_ARROW_BACK,
-                (ev) -> AjouterCandidature.show());
+//        getToolbar().addMaterialCommandToLeftBar(
+//                "",
+//                FontImage.MATERIAL_ARROW_BACK,
+//                (ev) -> AjouterCandidature.show());
 
 
       
@@ -178,7 +177,7 @@ public class AfficherCandidature extends BaseForm {
 
                  if(ServiceCandidature.getInstance().deleteCandidature(f)){
                      
-                      new AfficherCandidature(res).show();
+                      new AfficherCandidatureCand(res).show();
                  }
  
                }

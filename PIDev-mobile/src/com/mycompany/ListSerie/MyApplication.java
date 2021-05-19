@@ -1,8 +1,7 @@
 package com.mycompany.ListSerie;
 
 
-import GUI.Candidature.AfficherCandidature;
-import GUI.Candidature.AjouterCandidature;
+import GUI.Candidature.AfficherCandidatureCand;
 import GUI.Candidature.ModifierCandidature;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Display;
@@ -56,9 +55,9 @@ public class MyApplication {
         }
 
             
-          new AjouterCandidature(theme).show();
+          // new AjouterCandidature(theme).show();
             
-          //new AfficherCandidature(theme).show();
+          new AfficherCandidatureCand(theme).show();
            
           // new ModifierCandidature(theme).show();
             

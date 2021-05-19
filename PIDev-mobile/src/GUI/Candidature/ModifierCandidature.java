@@ -36,13 +36,13 @@ public class ModifierCandidature extends BaseForm {
         setLayout(new BorderLayout((BorderLayout.CENTER_BEHAVIOR_CENTER)));
         super.installSidemenu(res);
         
-        Form AfficherCandidature = null;
+        Form AfficherCandidatureCand = null;
         //this.getAllStyles().setBgImage(theme.getImage("backgroundForm.jpg"));
         //this.getAllStyles().setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
         getToolbar().addMaterialCommandToLeftBar(
                 "",
                 FontImage.MATERIAL_ARROW_BACK,
-                (ev) -> AfficherCandidature.show());
+                (ev) -> AfficherCandidatureCand.show());
         
         Label FormTitle = new Label("Modifier Candidature");
         FormTitle.getAllStyles().setAlignment(CENTER);
@@ -78,12 +78,12 @@ public class ModifierCandidature extends BaseForm {
                 
                 
                 if(ServiceCandidature.getInstance().modifierCandidature(f)){
-                    new AfficherCandidature(res).show();
+                    new AfficherCandidatureCand(res).show();
                 }
                 
         Button btnAnnuler = new Button("Annuler");
                 btnAnnuler.addActionListener(l ->{
-                new AfficherCandidature(res).show();
+                new AfficherCandidatureCand(res).show();
                 });
                 
 

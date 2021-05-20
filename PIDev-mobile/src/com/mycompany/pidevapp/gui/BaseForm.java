@@ -21,6 +21,7 @@ package com.mycompany.pidevapp.gui;
 import Entities.User;
 import GUI.Candidature.AfficherCandidatureEnt;
 import GUI.Formation.AfficherFormation;
+import GUI.Reclamation.AfficherReclamation;
 import static GUI.User.Login.idaffiche;
 import GUI.User.compte;
 import GUI.User.profil;
@@ -79,15 +80,10 @@ public class BaseForm extends Form {
             CandidatCandidature = selection;
         }
 
-//        Button inboxButton = new Button("Inbox", inboxImage);
-//        inboxButton.setUIID("SideCommand");
-//        inboxButton.getAllStyles().setPaddingBottom(0);
-//        Container inbox = FlowLayout.encloseMiddle(inboxButton, 
-//                new Label("18", "SideCommandNumber"));
-//        inbox.setLeadComponent(inboxButton);
-//        inbox.setUIID("SideCommand");
-//        inboxButton.addActionListener(e -> new InboxForm().show());
-//        getToolbar().addComponentToSideMenu(inbox);
+        Image ReclamationImage = null;
+        if (isCurrentReclamation()) {
+           ReclamationImage = selection;
+        }
        if(this.listu.getRoles().equals("Employeur")){
             getToolbar().addCommandToSideMenu("Offre", offreImage, e -> {
             new ShowOffreForm().show();
@@ -111,6 +107,9 @@ public class BaseForm extends Form {
 
         getToolbar().addCommandToSideMenu("Profil", ProfilImage, e -> {
             new profil(idaffiche).show();
+        });
+        getToolbar().addCommandToSideMenu("Reclamation", ReclamationImage, e -> {
+            new AfficherReclamation (res).show();
         });
 
         // spacer
@@ -143,6 +142,9 @@ public class BaseForm extends Form {
         return false;
     }
      protected boolean isCurrentCandidature() {
+        return false;
+    }
+       protected boolean isCurrentReclamation() {
         return false;
     }
 }

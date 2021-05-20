@@ -124,10 +124,10 @@ public class TakeQuiz extends BaseForm {
             for (int i = 0; i < reponses.size(); i++) {
                 ids.add(reponses.get(i).getId());
                 RadioButton rd = new RadioButton(reponses.get(i).getContenu_rep());
-                Border border = Border.createCompoundBorder(Border.createLineBorder(1, 4048823), Border.createLineBorder(1, 4048823), Border.createLineBorder(1, 4048823), Border.createLineBorder(1, 4048823));
+                Border border = Border.createCompoundBorder(Border.createLineBorder(1, 15980478), Border.createLineBorder(1, 4048823), Border.createLineBorder(1, 4048823), Border.createLineBorder(1, 4048823));
                 rd.setPreferredH(150);
                 rd.setPreferredW(800);
-                rd.getAllStyles().setBorder(RoundBorder.create().rectangle(true).color(4048823));
+                rd.getAllStyles().setBorder(RoundBorder.create().rectangle(true).color(15980478));
 
                 btnGroup.add(rd);
                 
@@ -137,9 +137,9 @@ public class TakeQuiz extends BaseForm {
                 error.setVisible(false);
                     for(int i = 0; i < reponses.size() ; i++){
                         if(btnGroup.getRadioButton(i).isSelected())
-                            btnGroup.getRadioButton(i).getAllStyles().setBorder(RoundBorder.create().rectangle(true).color(16735487));
+                            btnGroup.getRadioButton(i).getAllStyles().setBorder(RoundBorder.create().rectangle(true).color(14789629));
                     else
-                        btnGroup.getRadioButton(i).getAllStyles().setBorder(RoundBorder.create().rectangle(true).color(4048823));
+                        btnGroup.getRadioButton(i).getAllStyles().setBorder(RoundBorder.create().rectangle(true).color(15980478));
                     }
                     revalidate();
             });
@@ -148,7 +148,7 @@ public class TakeQuiz extends BaseForm {
             score = score * 100 / z.getQuestions().size();
             sq = new ServiceQuiz();
             sq.addQuizResult(z.getId(), score, res);
-            new AboutUs().show();
+            new ShowCandidatOffreForm().show();
             /////okhrej mel interface
         }
 

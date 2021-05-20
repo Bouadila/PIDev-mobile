@@ -5,6 +5,7 @@
  */
 package com.mycompany.pidevapp.services;
 
+import static GUI.User.Login.idaffiche;
 import ca.weblite.codename1.json.JSONArray;
 import ca.weblite.codename1.json.JSONException;
 import ca.weblite.codename1.json.JSONObject;
@@ -62,8 +63,9 @@ public class ServiceOffre {
                  + "&domaine="+o.getDomaine()
                  + "&experienceMin="+o.getExperienceMin()
                  + "&experienceMax="+o.getExperienceMax()
-                 + "&entpreprise=1"; 
+                 + "&entpreprise="+idaffiche; 
          req.setUrl(url);// Insertion de l'URL de notre demande de connexion
+         //req.setPost(true);
          req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {

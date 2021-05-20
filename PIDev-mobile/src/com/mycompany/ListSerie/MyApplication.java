@@ -3,6 +3,7 @@ package com.mycompany.ListSerie;
 import GUI.Candidature.AfficherCandidatureEnt;
 import GUI.Candidature.AjouterCandidature;
 import GUI.Formation.AjouterFormation;
+import GUI.Reclamation.AfficherReclamation;
 import GUI.User.ActiveUser;
 import GUI.User.Login;
 import GUI.User.NouvForm;
@@ -61,13 +62,7 @@ public class MyApplication {
             return;
         }
 
-//        ShowOffreForm fo = new ShowOffreForm();
-//        fo.show();
-
-//        new ActiveUser().show();
-////        
             new Login().show();
-
 
     }
 
